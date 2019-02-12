@@ -10,7 +10,7 @@ body {
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
 body {
-    background: white url(images/high_speed_train.jpg) no-repeat fixed center center / cover;
+    background: white url(../images/high_speed_train.jpg) no-repeat fixed center center / cover;
     font-family: "Poppins", sans-serif;
 }
 
@@ -52,7 +52,7 @@ body {
         height: 70px;
         float: left;
         margin-left: 100px;
-        background: url('images/logo.png') no-repeat;
+        background: url('../images/logo.png') no-repeat;
         background-size: contain;
     }
     a {
@@ -69,8 +69,18 @@ body {
 }
 
 .main {
+    #nameRoute {
+        text-align: center;
+        margin-top: 25px;
+        font-size: 27px;
+    }
+    #chooseRoute {
+        text-align: center;
+        font-size: 30px;
+        margin-top: 10px;
+    }
     .form {
-        margin-top: 200px;
+        margin-top: 170px;
         text-align: center;
         margin-right: 10px;
         input {
@@ -123,6 +133,98 @@ body {
             background: #BFBFBF;
         }
     }
+}
+
+.main .signIn {
+    text-align: center;
+    margin-top: 150px;
+    .text {
+        vertical-align: middle;
+        width: 210px;
+        height: 36px;
+        font-size: 20px;
+        padding: 5px 5px 5px 12px;
+        border: 1px solid #cecece;
+        background: #F6F6f6;
+        border-radius: 5px;
+    }
+}
+
+.main .route {
+    height: 100px;
+    width: 900px;
+    background: rgba(256, 256, 256, 0.9);
+    border-radius: 25px;
+    margin-left: 190px;
+    margin-bottom: 10px;
+    .train {
+        display: inline-block;
+        float: left;
+        padding-left: 50px;
+        padding-top: 38px;
+        font-size: 16px;
+        font-weight: 600;
+        width: 100px;
+        height: 100px;
+    }
+    ul {
+        display: inline-block;
+        float: left;
+        margin-left: 50px;
+        height: 100px;
+        li {
+            width: 140px;
+            list-style-type: none;
+        }
+    }
+    .timeStart {
+        margin-left: 10px;
+        padding-top: 18px;
+        width: 70px;
+        font-size: 30px;
+        font-weight: 600;
+    }
+    .arrow {
+        display: inline-block;
+        float: left;
+        font-size: 30px;
+        padding-top: 30px;
+        padding-left: 15px;
+        width: 50px;
+    }
+    .stationStart {
+        width: 170px;
+    }
+    .timeAll {
+        display: inline-block;
+        float: left;
+        padding-top: 38px;
+        padding-left: 30px;
+    }
+    .submit {
+        margin-top: 30px;
+        margin-left: 60px;
+        cursor: pointer;
+        border: 1px solid #cecece;
+        background: #f6f6f6;
+        box-shadow: inset 0px 20px 20px #ffffff;
+        border-radius: 10px;
+        width: 150px;
+        height: 40px;
+        font-size: 20px;
+        color: grey;
+    }
+    .submit:hover {
+        background: #D9D9D9;
+    }
+    .submit:active {
+        background: #BFBFBF;
+    }
+}
+
+.main .clr {
+    height: 100px;
+    width: 900px;
 }
 
 .footer {
