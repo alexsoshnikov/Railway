@@ -12,37 +12,49 @@
 </head>
 
 <body>
-    <div class="header">
-        <a href="#">
-            <div class="logo"></div>
-        </a>
-        <a href="#">
-            <div class="companyName">Railway company</div>
-        </a>
-        <ul class="menu">
-            <li><a href="#">SIGN IN</a></li>
-            <li><a href="#">SIGN UP</a></li>
-        </ul>
-    </div>
-    <div class="main">
-        <h1></h1>
-        <div class="form">
-            <input class="text" type="text" placeholder="From">
-            <input class="text" type="text" placeholder="To">
-            <div class="datapicker">
-                <input id="datepicker" placeholder="Date" width="200px" />
-                <script>
-                    $('#datepicker').datepicker({
-                        uiLibrary: 'bootstrap'
-                    });
-                </script>
+    <div class="wrapper">
+        <div class="header">
+            <a href="#">
+                <div class="logo"></div>
+            </a>
+            <a href="#">
+                <div class="companyName">Railway company</div>
+            </a>
+            <ul class="menu">
+                <li><a href="#">SIGN IN</a></li>
+                <li><a href="#">SIGN UP</a></li>
+            </ul>
+        </div>
+        <div class="main">
+            <h1></h1>
+            <div class="form">
+                <input class="text" type="text" placeholder="From">
+                <input class="text" type="text" placeholder="To">
+                <div class="datapicker">
+                    <input id="datepicker" placeholder="Date" width="200px" />
+                    <script>
+                        $('#datepicker').datepicker({
+                            uiLibrary: 'bootstrap'
+                        });
+                    </script>
+                </div>
             </div>
+            <div class="searchButton">
+                <input class="submit" type="submit" value="Search"> </div>
         </div>
-        <div class="searchButton">
-            <input class="submit" type="submit" value="Search">
+        <div class="footer">
+            <div class="contact">
+              <ul>
+                  <a href="#"><li>Company Information </li></a>
+                  <a href="#"><li>Contact Us </li></a>
+                  <a href="#"><li>Reviews</li></a>
+                  <a href="#"><li>Terms of service </li></a>
+              </ul>
+             </div>
+            <div class="copyright">
+                <h6>&copy; COPYRIGHT - INTERIOR 2016. ALL RIGHTS RESERVED.</h6> </div>
         </div>
     </div>
-    <div class="footer"></div>
 </body>
 
 </html>

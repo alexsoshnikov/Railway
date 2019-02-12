@@ -1,116 +1,154 @@
-    * {
-        margin: 0;
-        padding: 0;
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+body {
+    background: white url(images/high_speed_train.jpg) no-repeat fixed center center / cover;
+    font-family: "Poppins", sans-serif;
+}
+
+.wrapper {
+    min-height: 100%;
+    position: relative;
+}
+
+.header {
+    height: 70px;
+    background: rgba(256, 256, 256, 0.5);
+    .menu {
+        margin-top: 22px;
+        float: right;
+        margin-right: 70px;
+        li {
+            float: left;
+            list-style-type: none;
+            a {
+                color: black;
+                font-size: 24px;
+                padding: 0 20px;
+                display: block;
+                text-decoration: none;
+                width: 140px;
+                text-align: center;
+            }
+            a:hover {
+                border-bottom: 2px solid #000;
+                color: #212121;
+            }
+            a:active {
+                opacity: 0.3;
+            }
+        }
     }
-    
-    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
-    body {
-        background: white url(images/high_speed_train.jpg) no-repeat fixed center center / cover;
-        font-family: "Poppins", sans-serif;
-    }
-    
-    .header {
+    .logo {
+        width: 70px;
         height: 70px;
-        margin-top: 35px;
-        background: rgba(256, 256, 256, 0.5);
-        .menu {
-            margin-top: 22px;
-            float: right;
-            margin-right: 70px;
+        float: left;
+        margin-left: 100px;
+        background: url('images/logo.png') no-repeat;
+        background-size: contain;
+    }
+    a {
+        text-decoration: none;
+        color: black !important;
+        .companyName {
+            text-align: right;
+            float: left;
+            margin-left: 20px;
+            line-height: 70px;
+            font-size: 26px;
+        }
+    }
+}
+
+.main {
+    .form {
+        margin-top: 200px;
+        text-align: center;
+        input {
+            color: grey;
+        }
+        .text {
+            vertical-align: middle;
+            width: 240px;
+            height: 36px;
+            font-size: 20px;
+            padding: 5px 5px 5px 12px;
+            border: 1px solid #cecece;
+            background: #F6F6f6;
+            border-radius: 5px;
+        }
+        .datapicker {
+            display: inline-block;
+            vertical-align: middle;
+            input {
+                font-size: 20px;
+                background: #F6F6f6;
+                border: 1px solid #cecece;
+                height: 36px;
+                color: grey !mportant;
+            }
+        }
+    }
+    input:focus {
+        outline: none;
+    }
+    .searchButton {
+        text-align: center;
+        margin-top: 10px;
+        .submit {
+            cursor: pointer;
+            border: 1px solid #cecece;
+            background: #f6f6f6;
+            box-shadow: inset 0px 20px 20px #ffffff;
+            border-radius: 10px;
+            padding: 8px 14px;
+            width: 220px;
+            height: 40px;
+            font-size: 20px;
+            color: grey;
+        }
+        .submit:hover {
+            background: #D9D9D9;
+        }
+        .submit:active {
+            background: #BFBFBF;
+        }
+    }
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 115px;
+    background: rgba(256, 256, 256, 0.5);
+    .contact {
+        ul {
+            display: block;
+            margin-left: 460px;
             li {
                 float: left;
                 list-style-type: none;
                 a {
                     color: black;
                     font-size: 24px;
-                    padding: 0 20px;
                     display: block;
                     text-decoration: none;
-                    width: 140px;
                     text-align: center;
                 }
-                a:hover {
-                    border-bottom: 2px solid #000;
-                    color: #212121;
-                }
-                a:active {
-                    opacity: 0.3;
-                }
-            }
-        }
-        .logo {
-            width: 70px;
-            height: 70px;
-            float: left;
-            margin-left: 100px;
-            background: url('images/logo.png') no-repeat;
-            background-size: contain;
-        }
-        a {
-            text-decoration: none;
-            color: black !important;
-            .companyName {
-                text-align: right;
-                float: left;
-                margin-left: 20px;
-                line-height: 70px;
-                font-size: 26px;
             }
         }
     }
-    
-    .main {
-        .form {
-            margin-top: 200px;
-            text-align: center;
-            input {
-                color: grey;
-            }
-            .text {
-                vertical-align: middle;
-                width: 240px;
-                height: 36px;
-                font-size: 20px;
-                padding: 5px 5px 5px 12px;
-                border: 1px solid #cecece;
-                background: #F6F6f6;
-                border-radius: 5px;
-            }
-            .datapicker {
-                display: inline-block;
-                vertical-align: middle;
-                input {
-                    font-size: 20px;
-                    background: #F6F6f6;
-                    border: 1px solid #cecece;
-                    height: 36px;
-                    color: grey !mportant;
-                }
-            }
-        }
-        input:focus {
-            outline: none;
-        }
-        .searchButton {
-            text-align: center;
-            margin-top: 10px;
-            .submit {
-                cursor: pointer;
-                border: 1px solid #cecece;
-                background: #f6f6f6;
-                box-shadow: inset 0px 20px 20px #ffffff;
-                border-radius: 10px;
-                padding: 8px 14px;
-                width: 220px;
-                height: 40px;
-                font-size: 20px;
-                color: grey;
-            }
-            .submit:hover {
-                background: #D9D9D9;
-            }
-            .submit:active {
-                background: #BFBFBF;
-            }
-        }
+    .copyright {
+        margin-top: 90px;
+        text-align: center;
     }
+}

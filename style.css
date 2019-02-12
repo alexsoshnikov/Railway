@@ -4,13 +4,20 @@
   margin: 0;
   padding: 0;
 }
+html,
+body {
+  height: 100%;
+}
 body {
   background: white url(images/high_speed_train.jpg) no-repeat fixed center center / cover;
   font-family: "Poppins", sans-serif;
 }
+.wrapper {
+  min-height: 100%;
+  position: relative;
+}
 .header {
   height: 70px;
-  margin-top: 35px;
   background: rgba(255, 255, 255, 0.5);
 }
 .header .menu {
@@ -109,4 +116,30 @@ body {
 }
 .main .searchButton .submit:active {
   background: #BFBFBF;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 115px;
+  background: rgba(255, 255, 255, 0.5);
+}
+.footer .contact ul {
+  display: block;
+  margin-left: 460px;
+}
+.footer .contact ul li {
+  float: left;
+  list-style-type: none;
+}
+.footer .contact ul li a {
+  color: black;
+  font-size: 24px;
+  display: block;
+  text-decoration: none;
+  text-align: center;
+}
+.footer .copyright {
+  margin-top: 90px;
+  text-align: center;
 }
