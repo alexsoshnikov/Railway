@@ -14,21 +14,28 @@
 <body>
     <div class="wrapper">
         <div class="header">
-            <a href="#">
+            <a href="index.php">
                 <div class="logo"></div>
             </a>
-            <a href="#">
+            <a href="index.php">
                 <div class="companyName">Railway company</div>
             </a>
             <ul class="menu">
-                <li><a href="#">SIGN IN</a></li>
-                <li><a href="#">SIGN UP</a></li>
+                <li><a href="index.php?page=signin">SIGN IN</a></li>
+                <li><a href="index.php?page=signup">SIGN UP</a></li>
             </ul>
         </div>
         <div class="main">
-           <?php 
-            
-            
+          <?php 
+                $page = $_GET['page'];
+
+                      if (!isset($page)) {
+                          require('templates/main.php');
+                      } elseif ($page == 'signin') {
+                          require('templates/signin.php');
+                      } elseif ($page == 'signup') {
+                          require('templates/signup.php');
+                     } 
             ?>
         </div>
         <div class="footer">
