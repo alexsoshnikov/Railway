@@ -2,4 +2,4 @@
     <input class="text" type="text" placeholder="Login">
     <input class="text" type="text" placeholder="Password"> </div>
 <div class="searchButton">
-    <input class="submit" type="submit" value="Sing In"> </div>
+    <input class="submit" type="submit" value="Sign In"> </div>
