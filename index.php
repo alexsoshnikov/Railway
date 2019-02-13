@@ -26,7 +26,10 @@
             </ul>
         </div>
         <div class="main">
-           
+           <?php 
+            
+            
+            ?>
         </div>
         <div class="footer">
             <div class="contact">
