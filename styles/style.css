@@ -142,6 +142,21 @@ body {
   background: #F6F6f6;
   border-radius: 5px;
 }
+.main .signUp {
+  margin-top: 70px;
+  margin-left: 535px;
+}
+.main .signUp .text {
+  margin-top: 10px;
+  vertical-align: middle;
+  width: 210px;
+  height: 36px;
+  font-size: 20px;
+  padding: 5px 5px 5px 12px;
+  border: 1px solid #cecece;
+  background: #F6F6f6;
+  border-radius: 5px;
+}
 .main .route {
   height: 100px;
   width: 900px;
