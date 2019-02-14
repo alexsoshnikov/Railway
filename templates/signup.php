@@ -43,7 +43,7 @@ require_once "db.php";
             $errors[] = 'Repeat your password!' ;
         }
         
-          if ( $_POST['password_2'] != $data['password_1'] )
+          if ( $_POST['password_2'] != $_POST['password_1'] )
         {
            $errors[] = 'Re-password entered incorrectly!';
         }
@@ -67,12 +67,12 @@ require_once "db.php";
         { 
         //заргужаем данные в бд в случае успеха 
           $user = R::dispense('users');
-          $user->name = $data['name'];
-          $user->surname = $data['surname'];
-          $user->passport = $data['passport']; 
-          $user->telephone = $data['telephone'];
-          $user->email = $data['email'];
-          $user->password = password_hash($data['password'], PASSWORD_DEFAULT); 
+          $user->name = $_POST['name'];
+          $user->surname = $_POST['surname'];
+          $user->passport = $_POST['passport']; 
+          $user->telephone = $_POST['telephone'];
+          $user->email = $_POST['email'];
+          $user->password = password_hash($_POST['password_1'], PASSWORD_DEFAULT);
           R::store($user);
             
            // успешно зарегистрирован
@@ -86,6 +86,7 @@ require_once "db.php";
 }
 
 ?>
+ 
    
     <div class="whiteBox_signUp">
         <div class="header_whiteBox_signUp ">

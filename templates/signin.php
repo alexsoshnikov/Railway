@@ -1,6 +1,7 @@
 <?php 
 require_once "db.php";
 
+
 $header = 'Sign Up';
 if ( isset($_POST['do_signin']) )
 {
@@ -9,8 +10,7 @@ if ( isset($_POST['do_signin']) )
     if ($userCurrent)
     {
         //логин существует 
-    
-        if (password_verify($_POST['password'], $userCurrent->password))
+        if ( password_verify($_POST['password'], $userCurrent->password))
         {
             //если пароль совпадает, то нужно авторизовать пользователя
             $_SESSION['logged_user'] = $userCurrent;
@@ -30,10 +30,7 @@ if ( isset($_POST['do_signin']) )
         //выводим ошибки авторизации
         $header = array_shift($errors);
     }
- 
 }
-
-
 ?>
    
    
