@@ -54,11 +54,12 @@ $data = $_POST;
           $user->passport = $data['passport']; 
           $user->telephone = $data['telephone'];
           $user->email = $data['email'];
-          $user->password = $data['password_1']; 
+          $user->password =password_hash($data['password'], PASSWORD_DEFAULT); 
           R::store($user);
         }
          else
         {
+           
            $header = array_shift($errors);
         }
             
