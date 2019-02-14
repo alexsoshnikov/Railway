@@ -83,6 +83,11 @@ body {
   font-size: 30px;
   padding-top: 20px;
 }
+.main .header_whiteBox_signUp {
+  text-align: center;
+  font-size: 30px;
+  padding-top: 5spx;
+}
 .main .form {
   margin-top: 50px;
   text-align: center;
@@ -161,8 +166,8 @@ body {
   border-radius: 5px;
 }
 .main .whiteBox_signUp {
-  margin-top: 20px;
-  height: 430px;
+  margin-top: 10px;
+  height: 440px;
   width: 900px;
   background: rgba(255, 255, 255, 0.7);
   border-radius: 25px;
@@ -173,7 +178,7 @@ body {
   float: left;
   display: inline-block;
   margin-left: 200px;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 .main .listSignUp ul li {
   list-style-type: none;
@@ -183,7 +188,7 @@ body {
 }
 .main .signUp {
   display: inline-block;
-  margin-top: 30px;
+  margin-top: 10px;
   margin-left: 30px;
 }
 .main .signUp p {
