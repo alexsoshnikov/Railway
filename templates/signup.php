@@ -75,7 +75,10 @@ require_once "db.php";
           $user->password = password_hash($_POST['password_1'], PASSWORD_DEFAULT);
           R::store($user);
             
-           // успешно зарегистрирован
+            
+            
+               // успешно зарегистрирован
+            
         }
          else
         {
@@ -86,8 +89,6 @@ require_once "db.php";
 }
 
 ?>
- 
-   
     <div class="whiteBox_signUp">
         <div class="header_whiteBox_signUp ">
             <?php 
