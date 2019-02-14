@@ -1,80 +1,100 @@
 <?php 
 require_once "db.php";
 
-$data = $_POST;
  $header = 'Sign Up';
-    if(isset($data['do_signup']))
+    if(isset($_POST['do_signup']))
     {
         
+        
+        // создание массива в котором хранятся ошибки 
+        // проверка боксов на пустые значения 
         $errors = array();
-        if (trim($data['name']) == '')
+        if (trim($_POST['name']) == '')
         {
             $errors[] = 'Enter your name!' ;
         }
         
-         if (trim($data['surname']) == '')
+         if (trim($_POST['surname']) == '')
         {
             $errors[] = 'Enter your surname!' ;
         }
         
-         if (trim($data['passport']) == '')
+         if (trim($_POST['passport']) == '')
         {
             $errors[] = 'Enter your passport!' ;
         }
         
-         if (trim($data['telephone']) == '')
+         if (trim($_POST['telephone']) == '')
         {
             $errors[] = 'Enter your telephone!' ;
         }
           
-         if (trim($data['email']) == '')
+         if (trim($_POST['email']) == '')
         {
             $errors[] = 'Enter your email!' ;
         }
         
-          if (trim($data['password_1']) == '' )
+          if (trim($_POST['password_1']) == '' )
         {
             $errors[] = 'Enter your password!' ;
         }
-           if (trim($data['password_2']) == '' )
+           if (trim($_POST['password_2']) == '' )
         {
             $errors[] = 'Repeat your password!' ;
         }
         
-         if ( $data['password_2'] != $data['password_1'] )
-          {
+          if ( $_POST['password_2'] != $_POST['password_1'] )
+        {
            $errors[] = 'Re-password entered incorrectly!';
-          }
+        }
+          //проверка паспорта 
+          if ( R::count('users', "passport = ?", array($_POST['passport'])) > 0)
+        {
+           $errors[] = 'A user with this passport already exists!';
+        }
+        //проверка телефона 
+           if ( R::count('users', "telephone = ?", array($_POST['telephone'])) > 0)
+        {
+           $errors[] = 'A user with this telephone already exists!';
+        }
+        //проверка мейла 
+        if ( R::count('users', "email = ?", array($_POST['email'])) > 0)
+        {
+           $errors[] = 'A user with this Email already exists!';
+        }
         
         if ( empty($errors) )
-        {
+        { 
+        //заргужаем данные в бд в случае успеха 
           $user = R::dispense('users');
-          $user->name = $data['name'];
-          $user->surname = $data['surname'];
-          $user->passport = $data['passport']; 
-          $user->telephone = $data['telephone'];
-          $user->email = $data['email'];
-          $user->password = $data['password_1']; 
+          $user->name = $_POST['name'];
+          $user->surname = $_POST['surname'];
+          $user->passport = $_POST['passport']; 
+          $user->telephone = $_POST['telephone'];
+          $user->email = $_POST['email'];
+          $user->password = password_hash($_POST['password_1'], PASSWORD_DEFAULT);
           R::store($user);
+            
+           // успешно зарегистрирован
         }
          else
         {
+              //выводим ошибки регистрации
            $header = array_shift($errors);
         }
             
 }
 
 ?>
+ 
+   
     <div class="whiteBox_signUp">
         <div class="header_whiteBox_signUp ">
             <?php 
               if ($header == 'Sign Up')
-              {
-                  echo $header;
-              }
-            else {
-                echo '<font color=red>'.$header.'</font>';
-            }
+              {  echo $header;}
+              else
+              {   echo '<font color=red>'.$header.'</font>';  }
             ?></div>
         <div class="listSignUp">
             <ul>
@@ -89,15 +109,15 @@ $data = $_POST;
         </div>
         <form action="index.php?page=signup" method="POST">
             <div class="signUp">
-                <input class="text" type="text" placeholder="Name" name="name" value="<?php echo @$data['name']; ?>">
+                <input class="text" type="text" placeholder="Name" name="name" value="<?php echo @$_POST['name']; ?>">
                 <br>
-                <input class="text" type="text" placeholder="Surname" name="surname" value="<?php echo @$data['surname']; ?>">
+                <input class="text" type="text" placeholder="Surname" name="surname" value="<?php echo @$_POST['surname']; ?>">
                 <br>
-                <input class="text" type="text" placeholder="1111-111111" name="passport" value="<?php echo @$data['passport']; ?>">
+                <input class="text" type="text" placeholder="1111-111111" name="passport" value="<?php echo @$_POST['passport']; ?>">
                 <br>
-                <input class="text" type="text" placeholder="+7(900)111-11-11" name="telephone" value="<?php echo @$data['telephone']; ?>">
+                <input class="text" type="text" placeholder="+7(900)111-11-11" name="telephone" value="<?php echo @$_POST['telephone']; ?>">
                 <br>
-                <input class="text" type="email" placeholder="Email" name="email" value="<?php echo @$data['email']; ?>">
+                <input class="text" type="email" placeholder="Email" name="email" value="<?php echo @$_POST['email']; ?>">
                 <br>
                 <input class="text" type="Password" placeholder="Password" name="password_1">
                 <br>
