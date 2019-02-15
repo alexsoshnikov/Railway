@@ -75,8 +75,6 @@ require_once "db.php";
           $user->password = password_hash($_POST['password_1'], PASSWORD_DEFAULT);
           R::store($user);
             
-            
-            
                // успешно зарегистрирован
             
         }
@@ -90,6 +88,12 @@ require_once "db.php";
 
 ?>
     <div class="whiteBox_signUp">
+<!--
+        <div class="successRegistrationMain">
+            <div class="successRegistration">Вы успешно зарегистрированны!</div>
+            <div id="signinAfterUp"><a href="index.php?page=signin">SIGN IN</a></div>
+        </div>
+-->
         <div class="header_whiteBox_signUp ">
             <?php 
               if ($header == 'Sign Up')
