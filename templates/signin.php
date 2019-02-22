@@ -2,7 +2,7 @@
 require_once "db.php";
 
 
-$header = 'Sign Up';
+$header = 'Sign In';
 if ( isset($_POST['do_signin']) )
 {
     $errors = array();
@@ -36,7 +36,7 @@ if ( isset($_POST['do_signin']) )
    
    <div class="whiteBox_signIn">
     <div class="header_whiteBox"><?php 
-              if ($header == 'Sign Up')
+              if ($header == 'Sign In')
               {  echo $header;}
               else
               {   echo '<font color=red>'.$header.'</font>';  }
