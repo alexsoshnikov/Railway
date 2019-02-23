@@ -7,10 +7,11 @@ require "db.php";
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="styles/style.css">
-         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src="https://unpkg.com/gijgo@1.9.11/js/gijgo.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="main.js"></script>
         <link href="https://unpkg.com/gijgo@1.9.11/css/gijgo.min.css" rel="stylesheet" type="text/css" />
         <title>Railway Company</title>
     </head>
@@ -55,8 +56,6 @@ require "db.php";
                     <h6>&copy; COPYRIGHT - RAILWAY COMPANY 2019. ALL RIGHTS RESERVED.</h6> </div>
             </div>
         </div>
-        <script src="js/main.js"></script>
     </body>
-   
 
     </html>
