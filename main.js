@@ -4,6 +4,8 @@
 //	  });
 //	});
 // регистрация пользователя
+
+
 $(document).ready(function () {
     $('#form_signUp').submit(function () {
         //убираем класс ошибок с инпутов
@@ -55,6 +57,7 @@ $(document).ready(function () {
     });
 });
 // авторизация пользователя
+
 $(document).ready(function () {
     $('#form_signIn').submit(function () {
         //убираем класс ошибок с инпутов
