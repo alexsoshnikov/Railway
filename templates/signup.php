@@ -1,9 +1,4 @@
 
-<?php 
-
-require_once "db.php";
-
-?>
     <div class="whiteBox_signUp">
 
        

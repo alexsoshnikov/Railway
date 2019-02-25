@@ -3,7 +3,6 @@
 //          alert('asdasd');
 //	  });
 //	});
-
 $(document).ready(function () {
     $('#form_signUp').submit(function () {
         //убираем класс ошибок с инпутов
@@ -35,15 +34,15 @@ $(document).ready(function () {
             success: function (data) {
                 // в случае, когда пришло success. Отработало без ошибок
                 if (data.result == 'success') {
-                     $('.whiteBox_signUp >').hide();
-                     $('#successRegistrationMain').show();
+                    $('.whiteBox_signUp >').hide();
+                    $('#successRegistrationMain').show();
                     // в случае ошибок в форме
                 }
                 else {
                     // перебираем массив с ошибками
+                    $('#signUp_password').val('');
+                    $('#signUp_password_2').val('');
                     for (var errorField in data.text_error) {
-                        $('#signUp_password').val('');
-                        $('#signUp_password_2').val('');
                         $('#header_whiteBox_signUp_id').text(data.text_error[errorField]).css('color', 'red');
                         $('#' + errorField).addClass('error_input');
                     }

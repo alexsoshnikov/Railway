@@ -1,5 +1,5 @@
 <?php
-
+include ("../db.php");
 // массив для хранения ошибок
 $errorContainer = array();
 // полученные данные
@@ -27,20 +27,20 @@ foreach($arrayFields as $fieldName => $oneField){
         }
 
        //проверка паспорта 
-//          if ( R::count('users', "passport = ?", array($_POST['signUp_passport'])) > 0)
-//        {
-//           $errorContainer['signUp_passport'] = 'A user with this passport already exists!';
-//        }
-//        //проверка телефона 
-//           if ( R::count('users', "telephone = ?", array($_POST['signUp_telephone'])) > 0)
-//        {
-//           $errorContainer['signUp_telephone'] = 'A user with this telephone already exists!';
-//        }
-//        //проверка мейла 
-//        if ( R::count('users', "email = ?", array($_POST['signUp_email'])) > 0)
-//        {
-//           $errorContainer['signUp_email'] = 'A user with this Email already exists!';
-//        }
+          if ( R::count('users', "passport = ?", array($_POST['signUp_passport'])) > 0)
+        {
+           $errorContainer['signUp_passport'] = 'A user with this passport already exists!';
+        }
+        //проверка телефона 
+           if ( R::count('users', "telephone = ?", array($_POST['signUp_telephone'])) > 0)
+        {
+           $errorContainer['signUp_telephone'] = 'A user with this telephone already exists!';
+        }
+        //проверка мейла 
+        if ( R::count('users', "email = ?", array($_POST['signUp_email'])) > 0)
+        {
+           $errorContainer['signUp_email'] = 'A user with this Email already exists!';
+        }
 
 
 // делаем ответ для клиента
@@ -50,16 +50,14 @@ if(empty($errorContainer)){
     
     // заргужаем данные в бд в случае успеха 
 
-//          $user = R::dispense('users');
-//          $user->name = $_POST['signUp_name'];
-//          $user->surname = $_POST['signUp_surname'];
-//          $user->passport = $_POST['signUp_passport']; 
-//          $user->telephone = $_POST['signUp_telephone'];
-//          $user->email = $_POST['signUp_email'];
-//          $user->password = password_hash($_POST['signUp_password'], PASSWORD_DEFAULT);
-//          R::store($user);
-
-
+          $user = R::dispense('users');
+          $user->name = $_POST['signUp_name'];
+          $user->surname = $_POST['signUp_surname'];
+          $user->passport = $_POST['signUp_passport']; 
+          $user->telephone = $_POST['signUp_telephone'];
+          $user->email = $_POST['signUp_email'];
+          $user->password = password_hash($_POST['signUp_password'], PASSWORD_DEFAULT);
+          R::store($user);
     
 }
    else
