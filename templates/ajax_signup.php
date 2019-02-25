@@ -1,7 +1,7 @@
 <?php
 include ("../db.php");
 // массив для хранения ошибок
-$errorContainer = array();
+$errorContainer_SingUp = array();
 // полученные данные
 $arrayFields = array(
     'signUp_name' => $_POST['signUp_name'],
@@ -16,35 +16,35 @@ $arrayFields = array(
 // проверка всех полей на пустоту
 foreach($arrayFields as $fieldName => $oneField){
     if($oneField == '' || !isset($oneField)){
-        $errorContainer[$fieldName] = 'Fill all the fields';
+        $errorContainer_SingUp[$fieldName] = 'Fill all the fields';
     }
 } 
  
       // сравнение введенных паролей
         if($arrayFields['signUp_password'] != $arrayFields['signUp_password_2'])
         {
-             $errorContainer['signUp_password_2'] = 'Re-password entered incorrectly!';
+             $errorContainer_SingUp['signUp_password_2'] = 'Re-password entered incorrectly!';
         }
 
        //проверка паспорта 
           if ( R::count('users', "passport = ?", array($_POST['signUp_passport'])) > 0)
         {
-           $errorContainer['signUp_passport'] = 'A user with this passport already exists!';
+           $errorContainer_SingUp['signUp_passport'] = 'A user with this passport already exists!';
         }
         //проверка телефона 
            if ( R::count('users', "telephone = ?", array($_POST['signUp_telephone'])) > 0)
         {
-           $errorContainer['signUp_telephone'] = 'A user with this telephone already exists!';
+           $errorContainer_SingUp['signUp_telephone'] = 'A user with this telephone already exists!';
         }
         //проверка мейла 
         if ( R::count('users', "email = ?", array($_POST['signUp_email'])) > 0)
         {
-           $errorContainer['signUp_email'] = 'A user with this Email already exists!';
+           $errorContainer_SingUp['signUp_email'] = 'A user with this Email already exists!';
         }
 
 
 // делаем ответ для клиента
-if(empty($errorContainer)){
+if(empty($errorContainer_SingUp)){
    
     echo json_encode(array('result' => 'success'));
     
@@ -63,5 +63,5 @@ if(empty($errorContainer)){
    else
 {
     // если есть ошибки то отправляем
-    echo json_encode(array('result' => 'error', 'text_error' => $errorContainer));
+    echo json_encode(array('result' => 'error', 'text_error' => $errorContainer_SingUp));
 }

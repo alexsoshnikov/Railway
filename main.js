@@ -3,6 +3,7 @@
 //          alert('asdasd');
 //	  });
 //	});
+// регистрация пользователя
 $(document).ready(function () {
     $('#form_signUp').submit(function () {
         //убираем класс ошибок с инпутов
@@ -44,6 +45,44 @@ $(document).ready(function () {
                     $('#signUp_password_2').val('');
                     for (var errorField in data.text_error) {
                         $('#header_whiteBox_signUp_id').text(data.text_error[errorField]).css('color', 'red');
+                        $('#' + errorField).addClass('error_input');
+                    }
+                }
+            }
+        });
+        // останавливаем сабмит, чтоб не перезагружалась страница
+        return false;
+    });
+});
+// авторизация пользователя
+$(document).ready(function () {
+    $('#form_signIn').submit(function () {
+        //убираем класс ошибок с инпутов
+        $('input').each(function () {
+            $(this).removeClass('error_input');
+        });
+        // получение данных из полей
+        var signIn_email = $('#signIn_email').val();
+        var signIn_password = $('#signIn_password').val();
+        $.ajax({
+            // метод отправки 
+            type: "POST", // путь до скрипта-обработчика
+            url: "templates/ajax_signin.php", // какие данные будут переданы
+            data: {
+                'signIn_email': signIn_email
+                , 'signIn_password': signIn_password
+            }, // тип передачи данных
+            dataType: "json", // действие, при ответе с сервера
+            success: function (data) {
+                // в случае, когда пришло success. Отработало без ошибок
+                if (data.result == 'success') {
+                    $('#header_whiteBox_signIn').text('Success!').css('color', 'green');
+                }
+                // в случае ошибок в форме
+                else {
+                    // перебираем массив с ошибками
+                    for (var errorField in data.text_error) {
+                        $('#header_whiteBox_signIn').text(data.text_error[errorField]).css('color', 'red');
                         $('#' + errorField).addClass('error_input');
                     }
                 }

@@ -157,6 +157,11 @@ body {
   margin-bottom: 10px;
   margin-top: 100px;
 }
+.main .whiteBox_signIn #header_whiteBox_signIn {
+  text-align: center;
+  font-size: 30px;
+  padding-top: 20px;
+}
 .main .signIn {
   text-align: center;
   padding-top: 50px;
