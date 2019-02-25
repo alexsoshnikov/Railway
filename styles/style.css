@@ -70,6 +70,62 @@ body {
   line-height: 70px;
   font-size: 26px;
 }
+.header .userCurrent {
+  float: right;
+  margin-right: 15px;
+  display: inline-block;
+  margin-top: 7px;
+}
+.header .userCurrent .nameuser,
+.header .userCurrent .surnameuser {
+  font-size: 26px;
+  float: left;
+}
+.header .userCurrent .userimg {
+  display: inline-block;
+  margin-top: 3px;
+  margin-right: 10px;
+  width: 25px;
+  height: 25px;
+  float: left;
+  margin-left: 100px;
+  background: url('../images/user.png') no-repeat;
+  background-size: contain;
+}
+.header .userCurrent .balance {
+  margin-left: 135px;
+}
+.header .userCurrent li {
+  list-style-type: none;
+  float: left;
+}
+.header .userCurrent .logoutimg {
+  margin-top: 15px;
+  margin-right: 10px;
+  width: 25px;
+  height: 25px;
+  float: left;
+  margin-left: 15px;
+  background: url('../images/logout.png') no-repeat;
+  background-size: contain;
+}
+.header .userCurrent .money {
+  margin-top: 15px;
+  width: 25px;
+  height: 25px;
+  float: left;
+  margin-left: 30px;
+  background: url('../images/money.png') no-repeat;
+  background-size: contain;
+}
+.header .userCurrent .money:hover,
+.header .userCurrent .logoutimg:hover {
+  opacity: 0.7;
+}
+.header .userCurrent .money:active,
+.header .userCurrent .logoutimg:active {
+  opacity: 0.3;
+}
 .main .whiteBox_main {
   height: 230px;
   width: 700px;

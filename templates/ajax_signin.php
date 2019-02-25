@@ -33,7 +33,9 @@ foreach($arrayFields as $fieldName => $oneField){
 // делаем ответ для клиента
 if(empty($errorContainer_SignIn)){
    
+    $_SESSION['logged_user'] = $userCurrent;
     echo json_encode(array('result' => 'success'));
+    
     
 }
    else

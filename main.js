@@ -80,6 +80,7 @@ $(document).ready(function () {
                 // в случае, когда пришло success. Отработало без ошибок
                 if (data.result == 'success') {
                     $('#header_whiteBox_signIn').text('Success!').css('color', 'green');
+                    window.location.href = 'index.php';
                 }
                 // в случае ошибок в форме
                 else {

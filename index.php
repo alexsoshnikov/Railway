@@ -19,16 +19,16 @@ require "db.php";
     <body>
         <div class="wrapper">
             <div class="header">
-                <a href="index.php">
-                    <div class="logo"></div>
-                </a>
-                <a href="index.php">
-                    <div class="companyName">Railway company</div>
-                </a>
-                <ul class="menu">
-                    <li><a href="index.php?page=signin">SIGN IN</a></li>
-                    <li><a href="index.php?page=signup">SIGN UP</a></li>
-                </ul>
+               <?php 
+                 if(!isset($_SESSION['logged_user'])) {
+                  if (!isset($page) || $page == 'signin' || $page == 'signup') {
+                          require('templates/header_logout.php'); } 
+                 }
+                 else {
+                      require('templates/header_login.php');
+                 }
+                 
+                ?>
             </div>
             <div class="main">
                 <?php 
@@ -40,6 +40,8 @@ require "db.php";
                           require('templates/signin.php');
                       } elseif ($page == 'signup') {
                           require('templates/signup.php');
+                     } elseif ($page == 'refill') {
+                          require('templates/refill.php');
                      } 
             ?>
             </div>
