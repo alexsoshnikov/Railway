@@ -1,4 +1,10 @@
-<div class="whiteBox_main">
+<?php 
+require_once "db.php";
+?>
+   
+
+   
+   <div class="whiteBox_main">
     <div class="header_whiteBox">Choose your route</div>
     <div class="form">
         <input class="text" type="text" placeholder="From">

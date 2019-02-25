@@ -12,6 +12,12 @@ body {
   background: white url(../images/high_speed_train.jpg) no-repeat fixed center center / cover;
   font-family: "Poppins", sans-serif;
 }
+.error_input {
+  border: 1px solid #FF0000 !important;
+}
+#successRegistrationMain {
+  display: none;
+}
 .wrapper {
   min-height: 100%;
   position: relative;
@@ -83,6 +89,11 @@ body {
   font-size: 30px;
   padding-top: 20px;
 }
+.main .header_whiteBox_signUp {
+  text-align: center;
+  font-size: 30px;
+  padding-top: 5spx;
+}
 .main .form {
   margin-top: 50px;
   text-align: center;
@@ -146,9 +157,14 @@ body {
   margin-bottom: 10px;
   margin-top: 100px;
 }
+.main .whiteBox_signIn #header_whiteBox_signIn {
+  text-align: center;
+  font-size: 30px;
+  padding-top: 20px;
+}
 .main .signIn {
   text-align: center;
-  padding-top: 45px;
+  padding-top: 50px;
 }
 .main .signIn .text {
   vertical-align: middle;
@@ -161,19 +177,54 @@ body {
   border-radius: 5px;
 }
 .main .whiteBox_signUp {
-  margin-top: 20px;
-  height: 430px;
+  margin-top: 10px;
+  height: 440px;
   width: 900px;
   background: rgba(255, 255, 255, 0.7);
   border-radius: 25px;
   margin-left: 190px;
   margin-bottom: 10px;
 }
+.main .whiteBox_signUp .successRegistration {
+  position: relative;
+  top: 40px;
+  height: 140px;
+  width: 500px;
+  margin-left: 190px;
+  text-align: center;
+  font-size: 30px;
+  padding-top: 45px;
+  color: black;
+}
+.main .whiteBox_signUp #signinAfterUp {
+  margin-left: 350px;
+  text-align: center;
+  margin-top: 100px;
+}
+.main .whiteBox_signUp #signinAfterUp a {
+  color: black;
+  font-size: 23px;
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  border: 1px solid grey;
+  width: 200px;
+  border-radius: 10px;
+  border: 2px solid #cecece;
+  background: #f6f6f6;
+  box-shadow: inset 0px 20px 20px #ffffff;
+}
+.main .whiteBox_signUp #signinAfterUp a:hover {
+  opacity: 0.6;
+}
+.main .whiteBox_signUp #signinAfterUp a:active {
+  opacity: 0.1;
+}
 .main .listSignUp {
   float: left;
   display: inline-block;
   margin-left: 200px;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 .main .listSignUp ul li {
   list-style-type: none;
@@ -183,7 +234,7 @@ body {
 }
 .main .signUp {
   display: inline-block;
-  margin-top: 30px;
+  margin-top: 10px;
   margin-left: 30px;
 }
 .main .signUp p {
