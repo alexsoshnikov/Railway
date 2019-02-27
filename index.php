@@ -15,7 +15,6 @@ require "db.php";
         <link href="https://unpkg.com/gijgo@1.9.11/css/gijgo.min.css" rel="stylesheet" type="text/css" />
         <title>Railway Company</title>
     </head>
-
     <body>
         <div class="wrapper">
             <div class="header">
@@ -40,8 +39,10 @@ require "db.php";
                           require('templates/signin.php');
                       } elseif ($page == 'signup') {
                           require('templates/signup.php');
+
                      } elseif ($page == 'payment') {
                           require('templates/payment.php');
+
                      } 
             ?>
             </div>
