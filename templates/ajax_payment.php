@@ -23,12 +23,12 @@ foreach($arrayFields as $fieldName => $oneField){
 if(empty($errorContainer_payment)){
        // заргужаем данные в бд в случае успеха 
     echo json_encode(array('result' => 'success'));
+    
           $payment = R::dispense('payment');
           $payment->id_user = $_SESSION['logged_user']->id; 
           $payment->card = $_POST['number'];
           $payment->money = $_POST['money'];
           R::store($payment); 
-
 }
    else
 {
