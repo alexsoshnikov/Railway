@@ -8,6 +8,10 @@ body {
     height: 100%;
 }
 
+html {
+    overflow-x: hidden;
+}
+
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
 body {
     background: white url(../images/high_speed_train.jpg) no-repeat fixed center center / cover;
@@ -123,10 +127,12 @@ body {
         background: url('../images/money.png') no-repeat;
         background-size: contain;
     }
-    .money:hover, .logoutimg:hover {
+    .money:hover,
+    .logoutimg:hover {
         opacity: 0.7;
     }
-      .money:active, .logoutimg:active {
+    .money:active,
+    .logoutimg:active {
         opacity: 0.3;
     }
 }
@@ -198,7 +204,6 @@ body {
             background: #f6f6f6;
             box-shadow: inset 0px 20px 20px #ffffff;
             border-radius: 10px;
-            padding: 8px 14px;
             width: 220px;
             height: 40px;
             font-size: 20px;
@@ -291,6 +296,203 @@ body {
     }
 }
 
+.main .refillBox {
+    margin-top: 10px;
+    height: 440px;
+    width: 900px;
+    background: rgba(256, 256, 256, 0.7);
+    border-radius: 25px;
+    margin-left: 190px;
+    margin-bottom: 10px;
+    .card-wrapper {
+        padding-top: 15px;
+    }
+    .input_main {
+        display: inline-block;
+        margin-top: 5px;
+        margin-left: 295px;
+    }
+    .text {
+        margin-top: 5px;
+        width: 310px;
+        height: 36px;
+        font-size: 20px;
+        padding: 5px 5px 5px 12px;
+        border: 1px solid #cecece;
+        background: #F6F6f6;
+        border-radius: 5px;
+    }
+    #cvc,
+    #expiry {
+        width: 153px !important;
+    }
+    #name {
+        text-transform: uppercase;
+    }
+    .refillButton {
+        margin-top: 5px;
+        margin-left: 340px;
+        .submit {
+            cursor: pointer;
+            border: 1px solid #cecece;
+            background: #f6f6f6;
+            box-shadow: inset 0px 20px 20px #ffffff;
+            border-radius: 10px;
+            width: 220px;
+            height: 35px;
+            font-size: 20px;
+            color: grey;
+        }
+        .submit:hover {
+            background: #D9D9D9;
+        }
+        .submit:active {
+            background: #BFBFBF;
+        }
+    }
+    .loadpay {
+        display: none;
+        text-align: center;
+        margin-top: 10px;
+        .namethanks {
+            margin-top: 25px;
+            font-size: 27px;
+            color: green;
+        }
+    }
+}
+
+.main .refillBox .loadpay {
+    
+    .load-1 {
+        margin-top: 35px;
+    }
+    .line {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        background-color: #a6a6a6;
+    }
+    .load-1 .line:nth-last-child(1) {
+        animation: loadingA 1.5s 1s infinite;
+    }
+    .load-1 .line:nth-last-child(2) {
+        animation: loadingA 1.5s .5s infinite;
+    }
+    .load-1 .line:nth-last-child(3) {
+        animation: loadingA 1.5s 0s infinite;
+    }
+    @keyframes loadingA {
+        0 {
+            height: 15px;
+        }
+        50% {
+            height: 35px;
+        }
+        100% {
+            height: 15px;
+        }
+    }
+    @keyframes loadingB {
+        0 {
+            width: 15px;
+        }
+        50% {
+            width: 35px;
+        }
+        100% {
+            width: 15px;
+        }
+    }
+    @keyframes loadingC {
+        0 {
+            transform: translate(0, 0);
+        }
+        50% {
+            transform: translate(0, 15px);
+        }
+        100% {
+            transform: translate(0, 0);
+        }
+    }
+    @keyframes loadingD {
+        0 {
+            transform: rotate(0deg);
+        }
+        50% {
+            transform: rotate(180deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    @keyframes loadingE {
+        0 {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    @keyframes loadingF {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    @keyframes loadingG {
+        0% {
+            transform: translate(0, 0) rotate(0deg);
+        }
+        50% {
+            transform: translate(70px, 0) rotate(360deg);
+        }
+        100% {
+            transform: translate(0, 0) rotate(0deg);
+        }
+    }
+    @keyframes loadingH {
+        0% {
+            width: 15px;
+        }
+        50% {
+            width: 35px;
+            padding: 4px;
+        }
+        100% {
+            width: 15px;
+        }
+    }
+    @keyframes loadingI {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    @keyframes bounce {
+        0%,
+        100% {
+            transform: scale(0.0);
+        }
+        50% {
+            transform: scale(1.0);
+        }
+    }
+    @keyframes loadingJ {
+        0%,
+        100% {
+            transform: translate(0, 0);
+        }
+        50% {
+            transform: translate(80px, 0);
+            background-color: #f5634a;
+            width: 25px;
+        }
+    }
+}
+
 .main .listSignUp {
     float: left;
     display: inline-block;
@@ -334,7 +536,6 @@ body {
             background: #f6f6f6;
             box-shadow: inset 0px 20px 20px #ffffff;
             border-radius: 10px;
-            padding: 8px 14px;
             width: 220px;
             height: 40px;
             font-size: 20px;
@@ -346,6 +547,10 @@ body {
         .submit:active {
             background: #BFBFBF;
         }
+    }
+    #signUp_name,
+    #signUp_surname {
+        text-transform: capitalize;
     }
 }
 

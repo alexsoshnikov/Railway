@@ -4,8 +4,6 @@
 //	  });
 //	});
 // регистрация пользователя
-
-
 $(document).ready(function () {
     $('#form_signUp').submit(function () {
         //убираем класс ошибок с инпутов
@@ -57,7 +55,6 @@ $(document).ready(function () {
     });
 });
 // авторизация пользователя
-
 $(document).ready(function () {
     $('#form_signIn').submit(function () {
         //убираем класс ошибок с инпутов
@@ -87,6 +84,52 @@ $(document).ready(function () {
                     // перебираем массив с ошибками
                     for (var errorField in data.text_error) {
                         $('#header_whiteBox_signIn').text(data.text_error[errorField]).css('color', 'red');
+                        $('#' + errorField).addClass('error_input');
+                    }
+                }
+            }
+        });
+        // останавливаем сабмит, чтоб не перезагружалась страница
+        return false;
+    });
+});
+// Данные оплаты 
+$(document).ready(function () {
+    $('#form_payment').submit(function () {
+        //убираем класс ошибок с инпутов
+        $('input').each(function () {
+            $(this).removeClass('error_input');
+        });
+        // получение данных из полей
+        var number = $('#number').val();
+        var name = $('#name').val();
+        var expiry = $('#expiry').val();
+        var cvc = $('#cvc').val();
+        var money = $('#money').val();
+        $.ajax({
+            // метод отправки 
+            type: "POST", // путь до скрипта-обработчика
+            url: "templates/ajax_payment.php", // какие данные будут переданы
+            data: {
+                'number': number
+                , 'name': name
+                , 'expiry': expiry
+                , 'cvc': cvc
+                , 'money': money
+            }, // тип передачи данных
+            dataType: "json", // действие, при ответе с сервера
+            success: function (data) {
+                // в случае, когда пришло success. Отработало без ошибок
+                if (data.result == 'success') {
+                    $('.main_box').hide();
+                    $('.loadpay').show();
+                    
+                    setTimeout('window.location = "index.php";', 2500);
+                }
+                // в случае ошибок в форме
+                else {
+                    // перебираем массив с ошибками
+                    for (var errorField in data.text_error) {
                         $('#' + errorField).addClass('error_input');
                     }
                 }

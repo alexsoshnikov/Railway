@@ -19,7 +19,7 @@
             ?></h5> </div>
         </li>
         <li>
-            <a href="index.php?page=refill">
+            <a href="index.php?page=payment">
                 <div class="money"></div>
             </a>
         </li>
