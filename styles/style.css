@@ -8,9 +8,18 @@ html,
 body {
   height: 100%;
 }
+html {
+  overflow-x: hidden;
+}
 body {
   background: white url(../images/high_speed_train.jpg) no-repeat fixed center center / cover;
   font-family: "Poppins", sans-serif;
+}
+.error_input {
+  border: 1px solid #FF0000 !important;
+}
+#successRegistrationMain {
+  display: none;
 }
 .wrapper {
   min-height: 100%;
@@ -64,18 +73,88 @@ body {
   line-height: 70px;
   font-size: 26px;
 }
+.header .userCurrent {
+  float: right;
+  margin-right: 15px;
+  display: inline-block;
+  margin-top: 7px;
+}
+.header .userCurrent .nameuser,
+.header .userCurrent .surnameuser {
+  font-size: 26px;
+  float: left;
+}
+.header .userCurrent .userimg {
+  display: inline-block;
+  margin-top: 3px;
+  margin-right: 10px;
+  width: 25px;
+  height: 25px;
+  float: left;
+  margin-left: 100px;
+  background: url('../images/user.png') no-repeat;
+  background-size: contain;
+}
+.header .userCurrent .balance {
+  margin-left: 135px;
+}
+.header .userCurrent li {
+  list-style-type: none;
+  float: left;
+}
+.header .userCurrent .logoutimg {
+  margin-top: 15px;
+  margin-right: 10px;
+  width: 25px;
+  height: 25px;
+  float: left;
+  margin-left: 15px;
+  background: url('../images/logout.png') no-repeat;
+  background-size: contain;
+}
+.header .userCurrent .money {
+  margin-top: 15px;
+  width: 25px;
+  height: 25px;
+  float: left;
+  margin-left: 30px;
+  background: url('../images/money.png') no-repeat;
+  background-size: contain;
+}
+.header .userCurrent .money:hover,
+.header .userCurrent .logoutimg:hover {
+  opacity: 0.7;
+}
+.header .userCurrent .money:active,
+.header .userCurrent .logoutimg:active {
+  opacity: 0.3;
+}
+.main .whiteBox_main {
+  height: 230px;
+  width: 700px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 25px;
+  margin-left: 290px;
+  margin-bottom: 10px;
+  margin-top: 100px;
+}
 .main #nameRoute {
   text-align: center;
   margin-top: 25px;
   font-size: 27px;
 }
-.main #chooseRoute {
+.main .header_whiteBox {
   text-align: center;
   font-size: 30px;
-  margin-top: 10px;
+  padding-top: 20px;
+}
+.main .header_whiteBox_signUp {
+  text-align: center;
+  font-size: 30px;
+  padding-top: 5spx;
 }
 .main .form {
-  margin-top: 170px;
+  margin-top: 50px;
   text-align: center;
   margin-right: 10px;
 }
@@ -116,7 +195,6 @@ body {
   background: #f6f6f6;
   box-shadow: inset 0px 20px 20px #ffffff;
   border-radius: 10px;
-  padding: 8px 14px;
   width: 220px;
   height: 40px;
   font-size: 20px;
@@ -128,9 +206,23 @@ body {
 .main .searchButton .submit:active {
   background: #BFBFBF;
 }
+.main .whiteBox_signIn {
+  height: 230px;
+  width: 700px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 25px;
+  margin-left: 290px;
+  margin-bottom: 10px;
+  margin-top: 100px;
+}
+.main .whiteBox_signIn #header_whiteBox_signIn {
+  text-align: center;
+  font-size: 30px;
+  padding-top: 20px;
+}
 .main .signIn {
   text-align: center;
-  margin-top: 150px;
+  padding-top: 50px;
 }
 .main .signIn .text {
   vertical-align: middle;
@@ -142,9 +234,262 @@ body {
   background: #F6F6f6;
   border-radius: 5px;
 }
+.main .whiteBox_signUp {
+  margin-top: 10px;
+  height: 440px;
+  width: 900px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 25px;
+  margin-left: 190px;
+  margin-bottom: 10px;
+}
+.main .whiteBox_signUp .successRegistration {
+  position: relative;
+  top: 40px;
+  height: 140px;
+  width: 500px;
+  margin-left: 190px;
+  text-align: center;
+  font-size: 30px;
+  padding-top: 45px;
+  color: black;
+}
+.main .whiteBox_signUp #signinAfterUp {
+  margin-left: 350px;
+  text-align: center;
+  margin-top: 100px;
+}
+.main .whiteBox_signUp #signinAfterUp a {
+  color: black;
+  font-size: 23px;
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  border: 1px solid grey;
+  width: 200px;
+  border-radius: 10px;
+  border: 2px solid #cecece;
+  background: #f6f6f6;
+  box-shadow: inset 0px 20px 20px #ffffff;
+}
+.main .whiteBox_signUp #signinAfterUp a:hover {
+  opacity: 0.6;
+}
+.main .whiteBox_signUp #signinAfterUp a:active {
+  opacity: 0.1;
+}
+.main .refillBox {
+  margin-top: 10px;
+  height: 440px;
+  width: 900px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 25px;
+  margin-left: 190px;
+  margin-bottom: 10px;
+}
+.main .refillBox .card-wrapper {
+  padding-top: 15px;
+}
+.main .refillBox .input_main {
+  display: inline-block;
+  margin-top: 5px;
+  margin-left: 295px;
+}
+.main .refillBox .text {
+  margin-top: 5px;
+  width: 310px;
+  height: 36px;
+  font-size: 20px;
+  padding: 5px 5px 5px 12px;
+  border: 1px solid #cecece;
+  background: #F6F6f6;
+  border-radius: 5px;
+}
+.main .refillBox #cvc,
+.main .refillBox #expiry {
+  width: 153px !important;
+}
+.main .refillBox #name {
+  text-transform: uppercase;
+}
+.main .refillBox .refillButton {
+  margin-top: 5px;
+  margin-left: 340px;
+}
+.main .refillBox .refillButton .submit {
+  cursor: pointer;
+  border: 1px solid #cecece;
+  background: #f6f6f6;
+  box-shadow: inset 0px 20px 20px #ffffff;
+  border-radius: 10px;
+  width: 220px;
+  height: 35px;
+  font-size: 20px;
+  color: grey;
+}
+.main .refillBox .refillButton .submit:hover {
+  background: #D9D9D9;
+}
+.main .refillBox .refillButton .submit:active {
+  background: #BFBFBF;
+}
+.main .refillBox .loadpay {
+  display: none;
+  text-align: center;
+  margin-top: 10px;
+}
+.main .refillBox .loadpay .namethanks {
+  margin-top: 25px;
+  font-size: 27px;
+  color: green;
+}
+.main .refillBox .loadpay .load-1 {
+  margin-top: 35px;
+}
+.main .refillBox .loadpay .line {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  background-color: #a6a6a6;
+}
+.main .refillBox .loadpay .load-1 .line:nth-last-child(1) {
+  animation: loadingA 1.5s 1s infinite;
+}
+.main .refillBox .loadpay .load-1 .line:nth-last-child(2) {
+  animation: loadingA 1.5s .5s infinite;
+}
+.main .refillBox .loadpay .load-1 .line:nth-last-child(3) {
+  animation: loadingA 1.5s 0s infinite;
+}
+@keyframes loadingA {
+  0 {
+    height: 15px;
+  }
+  50% {
+    height: 35px;
+  }
+  100% {
+    height: 15px;
+  }
+}
+@keyframes loadingB {
+  0 {
+    width: 15px;
+  }
+  50% {
+    width: 35px;
+  }
+  100% {
+    width: 15px;
+  }
+}
+@keyframes loadingC {
+  0 {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, 15px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes loadingD {
+  0 {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loadingE {
+  0 {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loadingF {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes loadingG {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(70px, 0) rotate(360deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+@keyframes loadingH {
+  0% {
+    width: 15px;
+  }
+  50% {
+    width: 35px;
+    padding: 4px;
+  }
+  100% {
+    width: 15px;
+  }
+}
+@keyframes loadingI {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes bounce {
+  0%,
+  100% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+@keyframes loadingJ {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(80px, 0);
+    background-color: #f5634a;
+    width: 25px;
+  }
+}
+.main .listSignUp {
+  float: left;
+  display: inline-block;
+  margin-left: 200px;
+  margin-top: 10px;
+}
+.main .listSignUp ul li {
+  list-style-type: none;
+  padding: 6.5px 10px;
+  font-size: 24px;
+  font-weight: 600;
+}
 .main .signUp {
-  margin-top: 70px;
-  margin-left: 535px;
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 30px;
+}
+.main .signUp p {
+  font-size: 20px;
+  font-weight: 600;
 }
 .main .signUp .text {
   margin-top: 10px;
@@ -156,6 +501,31 @@ body {
   border: 1px solid #cecece;
   background: #F6F6f6;
   border-radius: 5px;
+}
+.main .signUp .signUpButton {
+  margin-top: 10px;
+  margin-left: -4px;
+}
+.main .signUp .signUpButton .submit {
+  cursor: pointer;
+  border: 1px solid #cecece;
+  background: #f6f6f6;
+  box-shadow: inset 0px 20px 20px #ffffff;
+  border-radius: 10px;
+  width: 220px;
+  height: 40px;
+  font-size: 20px;
+  color: grey;
+}
+.main .signUp .signUpButton .submit:hover {
+  background: #D9D9D9;
+}
+.main .signUp .signUpButton .submit:active {
+  background: #BFBFBF;
+}
+.main .signUp #signUp_name,
+.main .signUp #signUp_surname {
+  text-transform: capitalize;
 }
 .main .route {
   height: 100px;
