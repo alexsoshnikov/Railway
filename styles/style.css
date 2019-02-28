@@ -138,6 +138,11 @@ body {
   margin-bottom: 10px;
   margin-top: 100px;
 }
+.main .whiteBox_main .loadingCities {
+  text-align: center;
+  padding-top: 40px;
+  display: none;
+}
 .main #nameRoute {
   text-align: center;
   margin-top: 25px;
@@ -159,7 +164,7 @@ body {
   margin-right: 10px;
 }
 .main .form input {
-  color: grey;
+  color: black;
 }
 .main .form .text {
   vertical-align: middle;
@@ -180,7 +185,7 @@ body {
   background: #F6F6f6;
   border: 1px solid #cecece;
   height: 36px;
-  color: grey !mportant;
+  color: black !mportant;
 }
 .main input:focus {
   outline: none;
@@ -343,23 +348,23 @@ body {
   font-size: 27px;
   color: green;
 }
-.main .refillBox .loadpay .load-1 {
+.main .load-1 {
   margin-top: 35px;
 }
-.main .refillBox .loadpay .line {
+.main .line {
   display: inline-block;
   width: 15px;
   height: 15px;
   border-radius: 15px;
   background-color: #a6a6a6;
 }
-.main .refillBox .loadpay .load-1 .line:nth-last-child(1) {
+.main .load-1 .line:nth-last-child(1) {
   animation: loadingA 1.5s 1s infinite;
 }
-.main .refillBox .loadpay .load-1 .line:nth-last-child(2) {
+.main .load-1 .line:nth-last-child(2) {
   animation: loadingA 1.5s .5s infinite;
 }
-.main .refillBox .loadpay .load-1 .line:nth-last-child(3) {
+.main .load-1 .line:nth-last-child(3) {
   animation: loadingA 1.5s 0s infinite;
 }
 @keyframes loadingA {
@@ -573,15 +578,19 @@ body {
 .main .route .stationStart {
   width: 170px;
 }
+.main .route #endstat {
+  margin-left: 5px !important;
+}
 .main .route .timeAll {
   display: inline-block;
   float: left;
   padding-top: 38px;
   padding-left: 30px;
+  width: 120px;
 }
 .main .route .submit {
   margin-top: 30px;
-  margin-left: 60px;
+  margin-left: 40px;
   cursor: pointer;
   border: 1px solid #cecece;
   background: #f6f6f6;

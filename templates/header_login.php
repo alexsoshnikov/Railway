@@ -16,7 +16,7 @@
             <div class="balance">
                 <h5>Баланс:&nbsp;<?php 
             echo R::findOne('users', 'id = ?', array($_SESSION['logged_user']->id))->balance;
-            ?></h5> </div>
+            ?> ₽</h5> </div>
         </li>
         <li>
             <a href="index.php?page=payment">

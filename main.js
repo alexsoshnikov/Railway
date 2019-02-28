@@ -123,7 +123,6 @@ $(document).ready(function () {
                 if (data.result == 'success') {
                     $('.main_box').hide();
                     $('.loadpay').show();
-                    
                     setTimeout('window.location = "index.php";', 2500);
                 }
                 // в случае ошибок в форме
@@ -131,6 +130,46 @@ $(document).ready(function () {
                     // перебираем массив с ошибками
                     for (var errorField in data.text_error) {
                         $('#' + errorField).addClass('error_input');
+                    }
+                }
+            }
+        });
+        // останавливаем сабмит, чтоб не перезагружалась страница
+        return false;
+    });
+});
+$(document).ready(function () {
+    $('#form_search').submit(function () {
+        //убираем класс ошибок с инпутов
+        $('input').each(function () {
+            $(this).removeClass('error_input');
+        });
+        // получение данных из полей
+        var cityFrom = $('#cityFrom').val();
+        var cityTo = $('#cityTo').val();
+        $.ajax({
+            // метод отправки 
+            type: "POST", // путь до скрипта-обработчика
+            url: "templates/ajax_search.php", // какие данные будут переданы
+            data: {
+                'cityFrom': cityFrom
+                , 'cityTo': cityTo
+            }, // тип передачи данных
+            dataType: "json", // действие, при ответе с сервера
+            success: function (data) {
+                // в случае, когда пришло success. Отработало без ошибок
+                if (data.result == 'success') {
+                    $('#form_search').hide();
+                    $('.loadingCities').show();
+                    $('.header_whiteBox').text(data.from + ' → ' + data.to).css('color', 'black');
+                    setTimeout('window.location = "index.php?page=schedule";', 2500);
+                }
+                // в случае ошибок в форме
+                else {
+                    // перебираем массив с ошибками
+                    for (var errorField in data.text_error) {
+                        $('#' + errorField).addClass('error_input');
+                        $('.header_whiteBox').text(data.text_error[errorField]).css('color', 'red');
                     }
                 }
             }

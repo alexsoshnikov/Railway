@@ -145,6 +145,11 @@ body {
     margin-left: 290px;
     margin-bottom: 10px;
     margin-top: 100px;
+    .loadingCities {
+        text-align: center;
+        padding-top: 40px;
+        display: none;
+    }
 }
 
 .main {
@@ -168,7 +173,7 @@ body {
         text-align: center;
         margin-right: 10px;
         input {
-            color: grey;
+            color: black;
         }
         .text {
             vertical-align: middle;
@@ -188,7 +193,7 @@ body {
                 background: #F6F6f6;
                 border: 1px solid #cecece;
                 height: 36px;
-                color: grey !mportant;
+                color: black !mportant;
             }
         }
     }
@@ -362,8 +367,7 @@ body {
     }
 }
 
-.main .refillBox .loadpay {
-    
+.main {
     .load-1 {
         margin-top: 35px;
     }
@@ -599,15 +603,19 @@ body {
     .stationStart {
         width: 170px;
     }
+    #endstat {
+        margin-left: 5px !important;
+    }
     .timeAll {
         display: inline-block;
         float: left;
         padding-top: 38px;
         padding-left: 30px;
+        width: 120px;
     }
     .submit {
         margin-top: 30px;
-        margin-left: 60px;
+        margin-left: 40px;
         cursor: pointer;
         border: 1px solid #cecece;
         background: #f6f6f6;
