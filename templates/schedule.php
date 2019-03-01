@@ -1,42 +1,69 @@
 <?php
-    $city_from = $_SESSION['from'];
-    $city_to = $_SESSION['to']; 
-
-$idstationsfrom = R::find('station', 'city_id = ?', array(R::findOne('city', 'name = ?', array($city_from))->id));
-$idstationsto = R::find('station', 'city_id = ?', array(R::findOne('city', 'name = ?', array($city_to))->id));
-     
+//include "../../classes/app.php"; 
 
 
- foreach ($idstationsfrom as $idsta){
-       $bs[] = R::getAll( 'select * from station_route where number = 1 and id_station = ?',[$idsta -> id]); 
- }
- foreach ($idstationsto as $idsta){
-       $as[] = R::getAll( 'select * from station_route where number = 3 and id_station = ?',[$idsta -> id]); 
- }
-
- 
-
-//$arrTwo = array();
-//
-//foreach ($bs as $keys => $names) { 
-//  foreach ($names as $key => $name) {
-//    foreach ($name as $ke => $as){
-//          $arrTwo[$ke][] = $as;
-//        continue;
-//    }
-//  }
-//}
-//
-//$route_arr = $arrTwo['id_route']; 
+$city_from = $_SESSION['from'];
+$city_to = $_SESSION['to']; 
 
 
-//
-//echo '<pre>'; print_r($bs); echo '</pre>';
-//echo '<pre>'; print_r($as); echo '</pre>';
+ function Arrout($arr){
+        $arrOut = array();
+           foreach($arr as $subArr){
+             $arrOut = array_merge($arrOut,$subArr);
+    };
+     return $arrOut;
+  }
 
+
+function FindStations($city){
+    $idstations = R::find('station', 'city_id = ?', array(R::findOne('city', 'name = ?', array($city))->id));
+    return $idstations;
+}
+
+
+foreach (FindStations($city_from) as $idsta){
+       $arrOne[] = R::getAll( 'select * from station_route where number = 1 and id_station = ?',[$idsta -> id]);
+ };
+
+for($i =1; $i <= max(R::getCol( 'SELECT id_route FROM station_route')); $i++){
+     $arrTwo[] = max(R::getAll( 'SELECT number, id_route, id_station FROM station_route where id_route = ?',[$i]));
+}
+
+function DoNewArray ($array_ends, $array_starts) { 
+$result = array(); 
+      foreach ($array_ends as $route_ends) { 
+           if(searchForId($route_ends["id_route"], $array_starts)) { 
+              $result[]= array("id_route" => $route_ends["id_route"], 
+                                "start_station" => getStationById($route_ends["id_route"], $array_starts),
+                                 "end_station" => $route_ends["id_station"]); 
+        } 
+  } 
+    return $result;
+} 
+
+function searchForId ($route_id, $array_starts) { 
+           foreach ($array_starts as $route_starts) { 
+                if($route_starts["id_route"] == $route_id) 
+                      return true; 
+          } 
+      return false; 
+} 
+
+function getStationById($route_id, $array_starts) { 
+          foreach ($array_starts as $route_starts) { 
+            if($route_starts["id_route"] == $route_id) 
+              return $route_starts["id_station"]; 
+           } 
+} 
+
+
+
+
+echo '<pre>'; print_r(DoNewArray($arrTwo, Arrout($arrOne))); echo '</pre>';
 
 $main_arr = [
     [
+        'id'=>1, 
         'station_start' => 'Курский вокзал',
         'station_end'=> 'Рязань-1',
         'time_start' => '18:34',
@@ -44,6 +71,7 @@ $main_arr = [
          'train'=>'2321'  
     ],
        [
+           'id'=> 2, 
         'station_start' => 'Москвоский вокзал',
         'station_end'=> 'Тула-2',
         'time_start' => '12:00',
@@ -51,16 +79,16 @@ $main_arr = [
          'train'=>'271'  
     ],
        [
+         'id'=> 3, 
         'station_start' => 'Белорусский вокзал',
         'station_end'=> 'Сочи',
         'time_start' => '14:45',
-        'time'=> 1200,
+        'time'=> 1300,
          'train'=>'111'
     ],
     
     
 ];
-
 
 ?>
     <div id="nameRoute">
@@ -90,7 +118,7 @@ $main_arr = [
                     <div class="timeStart">
                         <?php 
                          $time = $way['time'];
-                         $hours = floor($time / 60);
+                     $hours = floor($time / 60);
                          $minutes = $time % 60;
                           $date = strtotime($way['time_start']) + strtotime($hours.':'.$minutes) - strtotime("00:00:00"); 
                            echo date('H:i',$date);
