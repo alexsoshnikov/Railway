@@ -4,6 +4,36 @@
 
 $city_from = $_SESSION['from'];
 $city_to = $_SESSION['to']; 
+  
+
+
+    
+ function DoNewArray ($array_ends, $array_starts) { 
+       $result = array(); 
+      foreach ($array_ends as $route_ends) { 
+           if(searchForId($route_ends["id_route"], $array_starts)) { 
+              $result[]= array("id_route" => $route_ends["id_route"], 
+                                "start_station" => getStationById($route_ends["id_route"], $array_starts),
+                                 "end_station" => $route_ends["id_station"]); 
+    } 
+  } 
+    return $result;
+} 
+
+  function searchForId ($route_id, $array_starts) { 
+           foreach ($array_starts as $route_starts) { 
+                if($route_starts["id_route"] == $route_id) 
+                      return true; 
+          } 
+      return false; 
+} 
+
+  function getStationById($route_id, $array_starts) { 
+          foreach ($array_starts as $route_starts) { 
+            if($route_starts["id_route"] == $route_id) 
+              return $route_starts["id_station"]; 
+           } 
+   } 
 
 
  function Arrout($arr){
@@ -28,33 +58,6 @@ foreach (FindStations($city_from) as $idsta){
 for($i =1; $i <= max(R::getCol( 'SELECT id_route FROM station_route')); $i++){
      $arrTwo[] = max(R::getAll( 'SELECT number, id_route, id_station FROM station_route where id_route = ?',[$i]));
 }
-
-function DoNewArray ($array_ends, $array_starts) { 
-$result = array(); 
-      foreach ($array_ends as $route_ends) { 
-           if(searchForId($route_ends["id_route"], $array_starts)) { 
-              $result[]= array("id_route" => $route_ends["id_route"], 
-                                "start_station" => getStationById($route_ends["id_route"], $array_starts),
-                                 "end_station" => $route_ends["id_station"]); 
-        } 
-  } 
-    return $result;
-} 
-
-function searchForId ($route_id, $array_starts) { 
-           foreach ($array_starts as $route_starts) { 
-                if($route_starts["id_route"] == $route_id) 
-                      return true; 
-          } 
-      return false; 
-} 
-
-function getStationById($route_id, $array_starts) { 
-          foreach ($array_starts as $route_starts) { 
-            if($route_starts["id_route"] == $route_id) 
-              return $route_starts["id_station"]; 
-           } 
-} 
 
 
 
