@@ -5,7 +5,7 @@
             <input class="text" id="cityFrom" type="text" placeholder="From">
             <input class="text" id="cityTo" type="text" placeholder="To">
             <div class="datapicker">
-                <input id="datepicker" placeholder="Date" width="200px" />
+                <input id="datepicker" type="text" placeholder="Date" width="200px" />
                 <script>
                     $('#datepicker').datepicker({
                         uiLibrary: 'bootstrap'

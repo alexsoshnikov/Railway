@@ -3,8 +3,16 @@
 // на вход получаем два имени станций откуда и куда
 $city_from = $_SESSION['from'];  
 $city_to = $_SESSION['to'];   
+$city_time = $_SESSION['datepicker']; 
 
-        
+
+function CreateDate($date){
+    $dateCre = htmlspecialchars($date);
+    $dateCre = date('Y-m-d', strtotime($dateCre));
+    return $dateCre; 
+}
+
+          
 // получаем массив всех станций в этих городах 
 function FindStations($city){
     $idstations = R::find('station', 'city_id = ?', array(R::findOne('city', 'name = ?', array($city))->id));
@@ -20,18 +28,6 @@ function Arrout($arr){
      return $arrOut;
 }
 
-// функция находит где станция начала является первой по порядку прохождения станций, и возращает те двумерный массив с id маршрута, id станции и порядковым номером, который является первым 
-
-function FistStationFrom($from){
-     foreach (FindStations($from) as $idsta){
-       $arrFrom[] = R::getAll( 'select * from station_route where number = 1 and id_station = ?',[$idsta -> id]);
-      }  
-     return Arrout($arrFrom); 
- }
-
-
-//echo '<pre>'; print_r(StationToSomewhere($city_from)); echo '</pre>';
-//echo '<pre>'; print_r(StationToSomewhere($city_to)); echo '</pre>';
 
 // функция находит все возможные маршруты со станцие "куда" , она может быть как концом, так и промежуточной точкой в маршруте (что тоже следует проверять..)
 function StationToSomewhere($to){
@@ -40,18 +36,27 @@ function StationToSomewhere($to){
     }
     return Arrout($arrTo);
 }
+           // функция находит где станция начала является первой по порядку прохождения станций, и возращает те двумерный массив с id маршрута, id станции и порядковым номером, который является первым 
 
-// ОСНОВНАЯ функция создает новый массив. Она сравнивает станции от и до по маршруту и соединяет их в один. Выводит поля - номер маршрута, 
+//function FistStationFrom($from){
+//     foreach (FindStations($from) as $idsta){
+//       $arrFrom[] = R::getAll( 'select * from station_route where number = 1 and id_station = ?',[$idsta -> id]);
+//      }  
+//     return Arrout($arrFrom); 
+// }
+//            
+            // ОСНОВНАЯ функция создает новый массив. Она сравнивает станции от и до по маршруту и соединяет их в один. Выводит поля - номер маршрута, 
 // id станции начала, id станции до пункта назначения, порядковый номер станции назначения и конечную станцию маршрута (станции назанчения и  конечная могут не совпадать, ножно проверять)
  function DoNewArray ($array_from, $array_to) { 
      $result = array(); 
       foreach ($array_to as $route_ends) { 
-           if(searchForId($route_ends["id_route"], $array_from)) { 
-              $result[]= array("id_route" => $route_ends["id_route"], 
+           if(searchForId($route_ends["id_route"], $route_ends["number"],  $array_from)) { 
+                    $result[]= array("id_route" => $route_ends["id_route"], 
                                "start_from" => getStationStartId($route_ends["id_route"], $array_from),
                                "station_to" => $route_ends["id_station"],
-                               "number_station_to" => $route_ends["number"],
-                               "end_station" => LastStationRoute($route_ends["id_route"]));
+                               "first_station" => FirstStationRoute($route_ends["id_route"]), 
+                               "last_station" => LastStationRoute($route_ends["id_route"]));
+               
             } 
       }
       return $result; 
@@ -59,13 +64,33 @@ function StationToSomewhere($to){
 
 
 // функция проверяет находится ли станции назначения на маршруте станции начала 
- function searchForId ($route_id, $array_from) { 
+ function searchForId ($route_id, $numb, $array_from) { 
            foreach ($array_from as $route_starts) { 
-                if($route_starts["id_route"] == $route_id) 
+                if(($route_starts["id_route"] == $route_id) && $route_starts["number"] < $numb) 
                       return true;
           } 
        return false; 
 } 
+
+ function getStationStartId ($route_id, $array_from) { 
+           foreach ($array_from as $route_starts) {
+             $arr = array();
+                if(($route_starts["id_route"] == $route_id)) {
+                    return $route_starts["id_station"]; 
+                }
+                       
+          } 
+       return false;
+} 
+
+// function getStationStartId ($route_id, $numb, $array_from) { 
+//           foreach ($array_from as $route_starts) {
+//             $arr = array();
+//                if(($route_starts["id_route"] == $route_id) && $route_starts["number"] < $numb) 
+//                      return $route_starts["id_station"]; 
+//          } 
+//       return false; 
+//} 
 
 // функция является частью основной и находит конечную станцию на маршруте, который является правильным (правильным маршрутом я назвал маршрут где станция начала и станция назначения находятся на одном маршруте)
  function LastStationRoute($route_id){
@@ -73,20 +98,16 @@ function StationToSomewhere($to){
      return $arrTo[0]['id_station'];
  }
 
-
-
-// функция вовращает id станции которая является началом на маршруте 
-  function getStationStartId($route_id, $array_from) { 
-          foreach ($array_from as $route_starts) { 
-            if($route_starts["id_route"] == $route_id) 
-              return $route_starts["id_station"]; 
-           } 
-   } 
+ function FirstStationRoute($route_id){
+     $arrTo[] = R::getAll( 'SELECT * FROM station_route where number = 1 and id_route = ?',[$route_id]);
+     return $arrTo[0][0]["id_station"];
+ }
 
 
 //
-echo '<pre>'; print_r(DoNewArray(FistStationFrom($city_from), StationToSomewhere($city_to))); echo '</pre>';  
-//echo '<pre>'; print_r(StationToSomewhere($city_to)); echo '</pre>';
+//echo '<pre>'; print_r(DoNewArray(StationToSomewhere ($city_from), StationToSomewhere($city_to) )); echo '</pre>';
+//echo '<pre>'; print_r(StationToSomewhere ($city_from)); echo '</pre>';
+//echo '<pre>'; print_r(StationToSomewhere ($city_to)); echo '</pre>';
 
 
 
@@ -120,12 +141,11 @@ $main_arr = [
 ];
 
 ?>
-    <div id="nameRoute">
-        <?php echo $city_from;?> &rarr;
-            <? echo $city_to;?>
-    </div>
+    <div id="nameRoute"> <?php echo $city_from;?> &rarr;
+            <? echo $city_to;?> </div>
     <?php foreach ($main_arr as $way) : ?>
         <div class="route">
+            <div class="routemain"> Москва &rarr; рязань </div>
             <div class="train">
                 <?php echo $way['train']?>
             </div>
@@ -141,14 +161,24 @@ $main_arr = [
                     </div>
                 </li>
             </ul>
-            <div class="arrow">&rArr;</div>
+            <ul class="centertime">
+                <li>
+                    <div class="arrow">&rArr;</div>
+                </li>
+                <li>
+                    <div class="timeAll">
+                        <?php 
+                      $time = $way['time'];
+                     $hours = floor($time / 60);
+                         $minutes = $time % 60; 
+                  echo $hours.'ч. '.$minutes.'мин'?>
+                    </div>
+                </li>
+            </ul>
             <ul>
                 <li>
                     <div class="timeStart">
                         <?php 
-                         $time = $way['time'];
-                     $hours = floor($time / 60);
-                         $minutes = $time % 60;
                           $date = strtotime($way['time_start']) + strtotime($hours.':'.$minutes) - strtotime("00:00:00"); 
                            echo date('H:i',$date);
                  
@@ -161,11 +191,6 @@ $main_arr = [
                     </div>
                 </li>
             </ul>
-            <div class="timeAll">
-                <?php  echo $hours.'ч. '.$minutes.'мин'?>
-            </div>
             <input class="submit" type="submit" value="Buy"> </div>
         <?php endforeach; ?>
             <div class="clr"></div>
-            
-         

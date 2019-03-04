@@ -147,6 +147,7 @@ $(document).ready(function () {
         // получение данных из полей
         var cityFrom = $('#cityFrom').val();
         var cityTo = $('#cityTo').val();
+        var datepicker = $('#datepicker').val();
         $.ajax({
             // метод отправки 
             type: "POST", // путь до скрипта-обработчика
@@ -154,6 +155,7 @@ $(document).ready(function () {
             data: {
                 'cityFrom': cityFrom
                 , 'cityTo': cityTo
+                , 'datepicker': datepicker
             }, // тип передачи данных
             dataType: "json", // действие, при ответе с сервера
             success: function (data) {

@@ -147,6 +147,8 @@ body {
   text-align: center;
   margin-top: 25px;
   font-size: 27px;
+  margin-bottom: 15px;
+  font-weight: 700;
 }
 .main .header_whiteBox {
   text-align: center;
@@ -186,6 +188,7 @@ body {
   border: 1px solid #cecece;
   height: 36px;
   color: black !mportant;
+  width: 100px !mportant;
 }
 .main input:focus {
   outline: none;
@@ -533,36 +536,45 @@ body {
   text-transform: capitalize;
 }
 .main .route {
-  height: 100px;
+  height: 130px;
   width: 900px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 25px;
   margin-left: 190px;
   margin-bottom: 10px;
 }
+.main .route .routemain {
+  margin-left: 320px;
+  padding-top: 10px;
+  font-size: 18px;
+}
 .main .route .train {
   display: inline-block;
   float: left;
-  padding-left: 50px;
-  padding-top: 38px;
-  font-size: 16px;
+  padding-left: 90px;
+  padding-top: 17px;
+  font-size: 20px;
   font-weight: 600;
   width: 100px;
   height: 100px;
 }
 .main .route ul {
+  padding-left: 10px;
   display: inline-block;
   float: left;
-  margin-left: 50px;
+  margin-left: 40px;
   height: 100px;
 }
 .main .route ul li {
   width: 140px;
   list-style-type: none;
 }
+.main .route .centertime {
+  width: 80px;
+  padding-left: 35px;
+}
 .main .route .timeStart {
-  margin-left: 10px;
-  padding-top: 18px;
+  margin-left: 50px;
   width: 70px;
   font-size: 30px;
   font-weight: 600;
@@ -571,11 +583,11 @@ body {
   display: inline-block;
   float: left;
   font-size: 30px;
-  padding-top: 30px;
   padding-left: 15px;
-  width: 50px;
+  width: 40px;
 }
 .main .route .stationStart {
+  text-align: center;
   width: 170px;
 }
 .main .route #endstat {
@@ -584,13 +596,11 @@ body {
 .main .route .timeAll {
   display: inline-block;
   float: left;
-  padding-top: 38px;
-  padding-left: 30px;
   width: 120px;
 }
 .main .route .submit {
-  margin-top: 30px;
-  margin-left: 40px;
+  margin-top: 5px;
+  margin-left: 70px;
   cursor: pointer;
   border: 1px solid #cecece;
   background: #f6f6f6;
