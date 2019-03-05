@@ -36,78 +36,52 @@ function StationToSomewhere($to){
     }
     return Arrout($arrTo);
 }
-           // функция находит где станция начала является первой по порядку прохождения станций, и возращает те двумерный массив с id маршрута, id станции и порядковым номером, который является первым 
 
-//function FistStationFrom($from){
-//     foreach (FindStations($from) as $idsta){
-//       $arrFrom[] = R::getAll( 'select * from station_route where number = 1 and id_station = ?',[$idsta -> id]);
-//      }  
-//     return Arrout($arrFrom); 
-// }
-//            
-            // ОСНОВНАЯ функция создает новый массив. Она сравнивает станции от и до по маршруту и соединяет их в один. Выводит поля - номер маршрута, 
+
+
+// ОСНОВНАЯ функция создает новый массив. Она сравнивает станции от и до по маршруту и соединяет их в один. Выводит поля - номер маршрута, 
 // id станции начала, id станции до пункта назначения, порядковый номер станции назначения и конечную станцию маршрута (станции назанчения и  конечная могут не совпадать, ножно проверять)
  function DoNewArray ($array_from, $array_to) { 
      $result = array(); 
       foreach ($array_to as $route_ends) { 
-           if(searchForId($route_ends["id_route"], $route_ends["number"],  $array_from)) { 
-                    $result[]= array("id_route" => $route_ends["id_route"], 
-                               "start_from" => getStationStartId($route_ends["id_route"], $array_from),
+               foreach($array_from as $start_route ){
+                   if(($start_route["id_route"] == $route_ends["id_route"]) && $start_route["number"] < $route_ends["number"]) {
+                        $result[]= array("id_route" => $route_ends["id_route"], 
+                               "start_from" => $start_route["id_station"],
                                "station_to" => $route_ends["id_station"],
                                "first_station" => FirstStationRoute($route_ends["id_route"]), 
                                "last_station" => LastStationRoute($route_ends["id_route"]));
+                   }
+               }
                
-            } 
+            
       }
       return $result; 
  }
 
+   
+$ara[] = R::getAll( 'SELECT * FROM schedule where time_start = ?',[2018-03-10])
+    
 
-// функция проверяет находится ли станции назначения на маршруте станции начала 
- function searchForId ($route_id, $numb, $array_from) { 
-           foreach ($array_from as $route_starts) { 
-                if(($route_starts["id_route"] == $route_id) && $route_starts["number"] < $numb) 
-                      return true;
-          } 
-       return false; 
-} 
 
- function getStationStartId ($route_id, $array_from) { 
-           foreach ($array_from as $route_starts) {
-             $arr = array();
-                if(($route_starts["id_route"] == $route_id)) {
-                    return $route_starts["id_station"]; 
-                }
-                       
-          } 
-       return false;
-} 
 
-// function getStationStartId ($route_id, $numb, $array_from) { 
-//           foreach ($array_from as $route_starts) {
-//             $arr = array();
-//                if(($route_starts["id_route"] == $route_id) && $route_starts["number"] < $numb) 
-//                      return $route_starts["id_station"]; 
-//          } 
-//       return false; 
-//} 
+echo '<pre>'; print_r($ara); echo '</pre>';
 
 // функция является частью основной и находит конечную станцию на маршруте, который является правильным (правильным маршрутом я назвал маршрут где станция начала и станция назначения находятся на одном маршруте)
  function LastStationRoute($route_id){
-     $arrTo[] = max(R::getAll( 'SELECT number, id_station FROM station_route where id_route = ?',[$route_id]));
-     return $arrTo[0]['id_station'];
+     $arr[] = max(R::getAll( 'SELECT number, id_station FROM station_route where id_route = ?',[$route_id]));
+     return $arr[0]['id_station'];
  }
 
  function FirstStationRoute($route_id){
-     $arrTo[] = R::getAll( 'SELECT * FROM station_route where number = 1 and id_route = ?',[$route_id]);
-     return $arrTo[0][0]["id_station"];
+     $arr[] = R::getAll( 'SELECT * FROM station_route where number = 1 and id_route = ?',[$route_id]);
+     return $arr[0][0]["id_station"];
  }
 
 
-//
-//echo '<pre>'; print_r(DoNewArray(StationToSomewhere ($city_from), StationToSomewhere($city_to) )); echo '</pre>';
-//echo '<pre>'; print_r(StationToSomewhere ($city_from)); echo '</pre>';
-//echo '<pre>'; print_r(StationToSomewhere ($city_to)); echo '</pre>';
+
+echo '<pre>'; print_r(DoNewArray(StationToSomewhere ($city_from), StationToSomewhere($city_to) )); echo '</pre>';
+
 
 
 
