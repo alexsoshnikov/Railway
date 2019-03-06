@@ -138,6 +138,8 @@ $(document).ready(function () {
         return false;
     });
 });
+
+
 $(document).ready(function () {
     $('#form_search').submit(function () {
         //убираем класс ошибок с инпутов

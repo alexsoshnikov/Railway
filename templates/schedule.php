@@ -3,16 +3,8 @@
 // на вход получаем два имени станций откуда и куда
 $city_from = $_SESSION['from'];  
 $city_to = $_SESSION['to'];   
-$city_time = $_SESSION['datepicker']; 
 
 
-function CreateDate($date){
-    $dateCre = htmlspecialchars($date);
-    $dateCre = date('Y-m-d', strtotime($dateCre));
-    return $dateCre; 
-}
-
-          
 // получаем массив всех станций в этих городах 
 function FindStations($city){
     $idstations = R::find('station', 'city_id = ?', array(R::findOne('city', 'name = ?', array($city))->id));
@@ -45,7 +37,7 @@ function StationToSomewhere($to){
      $result = array(); 
       foreach ($array_to as $route_ends) { 
                foreach($array_from as $start_route ){
-                   if(($start_route["id_route"] == $route_ends["id_route"]) && $start_route["number"] < $route_ends["number"]) {
+                   if(($start_route["id_route"] == $route_ends["id_route"]) && $start_route["number"] < $route_ends["number"] && TimeStart($route_ends["id_route"])) {
                         $result[]= array("id_route" => $route_ends["id_route"], 
                                "start_from" => $start_route["id_station"],
                                "station_to" => $route_ends["id_station"],
@@ -59,13 +51,27 @@ function StationToSomewhere($to){
       return $result; 
  }
 
-   
-$ara[] = R::getAll( 'SELECT * FROM schedule where time_start = ?',[2018-03-10])
-    
+ 
+function CreateDate($date){
+    $dateCre = htmlspecialchars($date);
+    $dateCre = date('m/d/Y', strtotime($dateCre));
+    return $dateCre; 
+}
+
+
+function TimeStart ($id_route) {
+    $timeright = array();
+    $arr[] =  R::getAll( 'SELECT * FROM schedule where id_route = ?',[$id_route]);
+    foreach(Arrout($arr) as $key) {
+        if((CreateDate($key["time_start"])) == date($_SESSION['datepicker']))
+            $timeright[] = $key["id_route"];
+ 
+    }
+    return $timeright; 
+}
 
 
 
-echo '<pre>'; print_r($ara); echo '</pre>';
 
 // функция является частью основной и находит конечную станцию на маршруте, который является правильным (правильным маршрутом я назвал маршрут где станция начала и станция назначения находятся на одном маршруте)
  function LastStationRoute($route_id){

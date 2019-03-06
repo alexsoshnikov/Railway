@@ -189,6 +189,7 @@ body {
   height: 36px;
   color: black !mportant;
   width: 100px !mportant;
+  transition: none !important;
 }
 .main input:focus {
   outline: none;

@@ -8,10 +8,11 @@ $arrayFields = array(
     'cityTo' => $_POST['cityTo'],
     'datepicker' => $_POST['datepicker']
 );
- 
 
-// проверка всех полей на пустоту
-
+          if ($_POST['datepicker'] == '' || !isset($_POST['datepicker']))
+        {
+              $errorContainer_search['datepicker'] = 'Select time!';
+        }
           if (!R::findOne('city', "name = ?", array($_POST['cityFrom']) ))
         {
            $errorContainer_search['cityFrom'] = 'There is no such city!';
@@ -20,7 +21,7 @@ $arrayFields = array(
         {
            $errorContainer_search['cityTo'] = 'There is no such city!';
         }
- 
+      
 
 // делаем ответ для клиента
 if(empty($errorContainer_search)){
