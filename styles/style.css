@@ -552,7 +552,7 @@ body {
 .main .route .train {
   display: inline-block;
   float: left;
-  padding-left: 90px;
+  padding-left: 40px;
   padding-top: 17px;
   font-size: 20px;
   font-weight: 600;

@@ -43,8 +43,7 @@ require "db.php";
                           require('templates/payment.php');
                      } elseif ($page == 'schedule') {
                           require('templates/schedule.php');
-                     } 
-                
+                     }
             ?>
             </div>
             <div class="footer">

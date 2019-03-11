@@ -35,14 +35,27 @@ function StationToSomewhere($to){
 // id станции начала, id станции до пункта назначения, порядковый номер станции назначения и конечную станцию маршрута (станции назанчения и  конечная могут не совпадать, ножно проверять)
  function DoNewArray ($array_from, $array_to) { 
      $result = array(); 
+     $number = 1;        
       foreach ($array_to as $route_ends) { 
                foreach($array_from as $start_route ){
-                   if(($start_route["id_route"] == $route_ends["id_route"]) && $start_route["number"] < $route_ends["number"] && TimeStart($route_ends["id_route"])) {
-                        $result[]= array("id_route" => $route_ends["id_route"], 
-                               "start_from" => $start_route["id_station"],
-                               "station_to" => $route_ends["id_station"],
-                               "first_station" => FirstStationRoute($route_ends["id_route"]), 
-                               "last_station" => LastStationRoute($route_ends["id_route"]));
+                   if(($start_route["id_route"] == $route_ends["id_route"]) && $start_route["number"] < $route_ends["number"] && TimeStart($route_ends["id_route"]) ) { 
+                         $arr = null; 
+                         $arr[] =  R::getAll( 'SELECT * FROM schedule where id_route = ? order by time_start',[$start_route["id_route"]]);
+                         foreach(Arrout($arr) as $key) {
+                               if((CreateDate($key["time_start"])) == date($_SESSION['datepicker']))
+                               {
+                                        $result[]= array( "ID" => $number, 
+                                       "id_route" => $route_ends["id_route"], 
+                                        "start_from" => $start_route["id_station"],
+                                        "station_to" => $route_ends["id_station"],
+                                        "first_station" => FirstStationRoute($route_ends["id_route"]), 
+                                        "last_station" => LastStationRoute($route_ends["id_route"]), 
+                                        "start_time" => CreateTime($key["time_start"]),
+                                        "train_id" => $key["id_train"]);
+                                  $number++; 
+                               }
+ 
+                        }
                    }
                }
                
@@ -51,6 +64,7 @@ function StationToSomewhere($to){
       return $result; 
  }
 
+
  
 function CreateDate($date){
     $dateCre = htmlspecialchars($date);
@@ -58,6 +72,12 @@ function CreateDate($date){
     return $dateCre; 
 }
 
+ 
+function CreateTime($date){
+    $dateCre = htmlspecialchars($date);
+    $dateCre = date('H:i', strtotime($dateCre));
+    return $dateCre; 
+}
 
 function TimeStart ($id_route) {
     $timeright = array();
@@ -86,58 +106,158 @@ function TimeStart ($id_route) {
 
 
 
-echo '<pre>'; print_r(DoNewArray(StationToSomewhere ($city_from), StationToSomewhere($city_to) )); echo '</pre>';
+function DestinationTime($distance, $weight, $traction, $maxtrain, $maxsection) {
+  
+    $a = ($traction*1000)/ ($weight*1000) - 0.05; 
 
-
-
-
-$main_arr = [
-    [
-        'id'=>1, 
-        'station_start' => 'Курский вокзал',
-        'station_end'=> 'Рязань-1',
-        'time_start' => '18:34',
-        'time'=> 184,
-         'train'=>'2321'  
-    ],
-       [
-           'id'=> 2, 
-        'station_start' => 'Москвоский вокзал',
-        'station_end'=> 'Тула-2',
-        'time_start' => '12:00',
-        'time'=> 500,
-         'train'=>'271'  
-    ],
-       [
-         'id'=> 3, 
-        'station_start' => 'Белорусский вокзал',
-        'station_end'=> 'Сочи',
-        'time_start' => '14:45',
-        'time'=> 1300,
-         'train'=>'111'
-    ],
+    if($maxsection != 0 && $maxsection < $maxtrain) {
+        $tStart = (($maxsection * 1000) / 3600) / $a; 
+    }
+    else {
+       $tStart = (($maxtrain * 1000) / 3600) / $a; 
+    }
     
+    $wayStart = ($a * (pow($tStart, 2)))/2;
+    $wayMain = ($distance * 1000) - $wayStart * 2;
     
-];
+    if($wayMain < 0) {
+        $wayStart = $distance * 1000 / 2;
+        $tStart = sqrt($wayStart*2 / $a);
+        $resulttime = 2 * $tStart;
+    }
+    else {
+        
+         if($maxsection != 0 && $maxsection < $maxtrain) {
+          $tMain = $wayMain / (($maxsection * 1000) / 3600); 
+         }
+         else {
+            $tMain = $wayMain / (($maxtrain * 1000) / 3600); 
+         }
+        $resulttime = $tMain + 2 * $tStart; 
+    }
+    
+    return ceil($resulttime); 
+} 
+
+
+function TotalWeightWagon ($id_train) {
+     $wagon = R::getAll( 'SELECT * FROM wagon where train_id = ? ',[$id_train]);
+           foreach ($wagon as $keys) { 
+              $totalWeight = $totalWeight + R::findOne( 'type_wagon', 'id = ?', array($keys["type_wagon_id"]))->weight;
+             }
+    return $totalWeight; 
+}
+
+
+function EngineInfo ($id_train) {
+       $engine = R::findOne('engine', 'id = ? ', array(R::findOne('train', 'id = ? ', array($id_train))->engine_id)); 
+       $engine_info = R::findOne('type_engine', 'id = ? ', array($engine->type_engine_id));  
+    return $engine_info; 
+}
+
+function StationName($id) {
+    $station = R::findOne('station', 'id = ? ', array($id))->name;  
+    return $station; 
+}
+
+function TrainName($id) {
+    $train = R::findOne('train', 'id = ? ', array($id))->name;  
+    return $train; 
+}
+
+function RouteInfo($arr) {
+    $res = array(); 
+    foreach($arr as $route) {
+         $totalWeight = 0; 
+         $routeArr = R::getAll( 'SELECT * FROM station_route where id_route = ? order by number',[$route["id_route"]]);
+         $totalWeight = TotalWeightWagon($route["train_id"]) + EngineInfo($route["train_id"])-> weight; 
+         $time = 0;
+         $predtime =0; 
+         if ($route["start_from"] == $route["first_station"]){
+              $i = 0; 
+            do {
+                
+                  $id_start = $routeArr[$i]["id_station"];
+                  $id_end = $routeArr[$i+1]["id_station"];
+                  $distance = R::findOne('destination', 'start_station = ? and end_station = ?', array($id_start, $id_end));
+                  $time = $time + DestinationTime($distance->distance,$totalWeight, EngineInfo($route["train_id"])-> traction_force, EngineInfo($route["train_id"])-> max_speed, $distance->section_speed);
+                
+             $i++;
+             $predtime = 0;
+            } while ($id_end != $route["station_to"]);
+        }
+        else {
+             $j = 0; 
+            do {
+                 
+                  $id_start_pred = $routeArr[$j]["id_station"];
+                  $id_end_pred = $routeArr[$j+1]["id_station"];
+                  $distance = R::findOne('destination', 'start_station = ? and end_station = ?', array($id_start_pred, $id_end_pred));
+                  $predtime = $predtime + DestinationTime($distance->distance,$totalWeight, EngineInfo($route["train_id"])-> traction_force, EngineInfo($route["train_id"])-> max_speed, $distance->section_speed);
+                
+             $i++;
+            } while ($id_end_pred != $route["start_from"]);
+            
+            $found_key = array_search($route["start_from"], array_column($routeArr, 'id_station'));
+             do {
+                
+                  $id_start_pred = $routeArr[$found_key]["id_station"];
+                  $id_end_pred = $routeArr[$found_key+1]["id_station"];
+                  $distance = R::findOne('destination', 'start_station = ? and end_station = ?', array($id_start_pred, $id_end_pred));
+                  $time = $time + DestinationTime($distance->distance,$totalWeight, EngineInfo($route["train_id"])-> traction_force, EngineInfo($route["train_id"])-> max_speed, $distance->section_speed);
+                 
+             $found_key++;
+            } while ($id_end_pred != $route["station_to"]);
+            
+        }
+        
+         $res[] = array("ID" => $route["ID"], 
+                        "time" => ceil($time/60), 
+                        "pred_time" => ceil($predtime/60),
+                        "station_from" => $route["start_from"],
+                        "station_to" => $route["station_to"], 
+                        "first_station"  => $route["first_station"], 
+                        "last_station" => $route["last_station"],
+                        "start_time" => $route["start_time"],
+                        "train_id" => $route["train_id"]);  
+    }
+    
+    return $res;
+}
+
+$mainArr = RouteInfo(DoNewArray(StationToSomewhere($city_from), StationToSomewhere($city_to))); 
+
+
+
+//
+//echo '<pre>'; print_r($mainArr); echo '</pre>';
 
 ?>
-    <div id="nameRoute"> <?php echo $city_from;?> &rarr;
-            <? echo $city_to;?> </div>
-    <?php foreach ($main_arr as $way) : ?>
+    <div id="nameRoute">
+        <?php echo $city_from;?> &rarr;
+            <? echo $city_to;?>
+    </div>
+    <?php foreach ($mainArr as $way) : ?>
         <div class="route">
-            <div class="routemain"> Москва &rarr; рязань </div>
+            <div class="routemain">  <?php echo StationName($way['first_station'])?> &rarr; <?php echo StationName($way['last_station'])?>  </div>
             <div class="train">
-                <?php echo $way['train']?>
+                <?php echo TrainName($way['train_id'])?>
             </div>
             <ul>
                 <li>
                     <div class="timeStart">
-                        <?php echo $way['time_start']?>
+                          <?php 
+                            $time_first = $way['pred_time']; 
+                            $hours_first = floor($time_first / 60);
+                         $minutes_first = $time_first % 60; 
+                          $date_first = strtotime($way['start_time']) + strtotime($hours_first.':'.$minutes_first) - strtotime("00:00:00"); 
+                           echo date('H:i',$date_first);
+                         ?>
                     </div>
                 </li>
                 <li>
                     <div class="stationStart">
-                        <?php echo $way['station_start']?>
+                       <?php echo StationName($way['station_from'])?>
                     </div>
                 </li>
             </ul>
@@ -159,7 +279,7 @@ $main_arr = [
                 <li>
                     <div class="timeStart">
                         <?php 
-                          $date = strtotime($way['time_start']) + strtotime($hours.':'.$minutes) - strtotime("00:00:00"); 
+                          $date = $date_first + strtotime($hours.':'.$minutes) - strtotime("00:00:00"); 
                            echo date('H:i',$date);
                  
                          ?>
@@ -167,7 +287,7 @@ $main_arr = [
                 </li>
                 <li>
                     <div class="stationStart" id="endstat">
-                        <?php echo $way['station_end']?>
+                         <?php echo StationName($way['station_to'])?>
                     </div>
                 </li>
             </ul>
