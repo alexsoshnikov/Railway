@@ -225,28 +225,29 @@ function RouteInfo($arr) {
     return $res;
 }
 
-$mainArr = RouteInfo(DoNewArray(StationToSomewhere($city_from), StationToSomewhere($city_to))); 
+$mainArr = RouteInfo(DoNewArray(StationToSomewhere($city_from), StationToSomewhere($city_to)));
 
-
-
-//
-//echo '<pre>'; print_r($mainArr); echo '</pre>';
 
 ?>
-    <div id="nameRoute">
+        
+
+        <div id="nameRoute">
         <?php echo $city_from;?> &rarr;
             <? echo $city_to;?>
     </div>
     <?php foreach ($mainArr as $way) : ?>
         <div class="route">
-            <div class="routemain">  <?php echo StationName($way['first_station'])?> &rarr; <?php echo StationName($way['last_station'])?>  </div>
+            <div class="routemain">
+                <?php echo StationName($way['first_station'])?> &rarr;
+                    <?php echo StationName($way['last_station'])?>
+            </div>
             <div class="train">
                 <?php echo TrainName($way['train_id'])?>
             </div>
             <ul>
                 <li>
                     <div class="timeStart">
-                          <?php 
+                        <?php 
                             $time_first = $way['pred_time']; 
                             $hours_first = floor($time_first / 60);
                          $minutes_first = $time_first % 60; 
@@ -257,7 +258,7 @@ $mainArr = RouteInfo(DoNewArray(StationToSomewhere($city_from), StationToSomewhe
                 </li>
                 <li>
                     <div class="stationStart">
-                       <?php echo StationName($way['station_from'])?>
+                        <?php echo StationName($way['station_from'])?>
                     </div>
                 </li>
             </ul>
@@ -281,13 +282,12 @@ $mainArr = RouteInfo(DoNewArray(StationToSomewhere($city_from), StationToSomewhe
                         <?php 
                           $date = $date_first + strtotime($hours.':'.$minutes) - strtotime("00:00:00"); 
                            echo date('H:i',$date);
-                 
                          ?>
                     </div>
                 </li>
                 <li>
                     <div class="stationStart" id="endstat">
-                         <?php echo StationName($way['station_to'])?>
+                        <?php echo StationName($way['station_to'])?>
                     </div>
                 </li>
             </ul>
