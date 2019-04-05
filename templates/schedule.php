@@ -229,77 +229,28 @@ $mainArr = RouteInfo(DoNewArray(StationToSomewhere($city_from), StationToSomewhe
 
 
 ?>
-    <section class="main-content-routes"> <span class="routes-title">Москва &rarr; Рязань</span>
-        <article class="routes-list"> <span class="list-train">MN0021</span>
-            <div class="list-arrival"> <span class="list-stations first">Курский вокзал</span> <span class="arrival-time">18:00</span> <span class="arrival-station">Курский вокзал</span> </div>
-            <div class="list-route-time">
-                <div class="route-arrow"></div> <span class="route-time">3h 21min</span> </div>
-            <div class="list-departure"> <span class="list-stations last">Курский вокзал</span> <span class="departure-time">21:00</span> <span class="departure-station">Рязань 1</span> </div>
-            <button class="list-button-buy">buy</button>
-        </article>
-        <div class="clr"></div>
-    </section>
-<!--
-    <div id="nameRoute">
-        <?php echo $city_from;?> &rarr;
-            <? echo $city_to;?>
-    </div>
-    <?php foreach ($mainArr as $way) : ?>
-        <div class="route">
-            <div class="routemain">
-                <?php echo StationName($way['first_station'])?> &rarr;
-                    <?php echo StationName($way['last_station'])?>
-            </div>
-            <div class="train">
-                <?php echo TrainName($way['train_id'])?>
-            </div>
-            <ul>
-                <li>
-                    <div class="timeStart">
-                        <?php 
+    <section class="main-content-routes"> <span class="routes-title"><?php echo $city_from;?> &rarr; <?php echo $city_to;?></span>
+        <?php foreach ($mainArr as $way) : ?>
+            <article class="routes-list"> <span class="list-train"> <?php echo TrainName($way['train_id'])?></span>
+                <div class="list-arrival"> <span class="list-stations first"> <?php echo StationName($way['first_station'])?> </span> <span class="arrival-time"><?php 
                             $time_first = $way['pred_time']; 
                             $hours_first = floor($time_first / 60);
                          $minutes_first = $time_first % 60; 
                           $date_first = strtotime($way['start_time']) + strtotime($hours_first.':'.$minutes_first) - strtotime("00:00:00"); 
                            echo date('H:i',$date_first);
-                         ?>
-                    </div>
-                </li>
-                <li>
-                    <div class="stationStart">
-                        <?php echo StationName($way['station_from'])?>
-                    </div>
-                </li>
-            </ul>
-            <ul class="centertime">
-                <li>
-                    <div class="arrow">&rArr;</div>
-                </li>
-                <li>
-                    <div class="timeAll">
-                        <?php 
+                         ?></span> <span class="arrival-station">   <?php echo StationName($way['station_from'])?></span> </div>
+                <div class="list-route-time">
+                    <div class="route-arrow"></div> <span class="route-time"><?php 
                       $time = $way['time'];
                      $hours = floor($time / 60);
                          $minutes = $time % 60; 
-                  echo $hours.'ч. '.$minutes.'мин'?>
-                    </div>
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <div class="timeStart">
-                        <?php 
+                  echo $hours.'h. '.$minutes.'min'?></span> </div>
+                <div class="list-departure"> <span class="list-stations last"><?php echo StationName($way['last_station'])?></span> <span class="departure-time"> <?php 
                           $date = $date_first + strtotime($hours.':'.$minutes) - strtotime("00:00:00"); 
                            echo date('H:i',$date);
-                         ?>
-                    </div>
-                </li>
-                <li>
-                    <div class="stationStart" id="endstat">
-                        <?php echo StationName($way['station_to'])?>
-                    </div>
-                </li>
-            </ul>
-            <input class="submit" type="submit" value="Buy"> </div>
-        <?php endforeach; ?>
-            <div class="clr"></div>-->
+                         ?></span> <span class="departure-station">       <?php echo StationName($way['station_to'])?></span> </div>
+                <button class="list-button-buy">buy</button>
+            </article>
+            <?php endforeach; ?>
+                <div class="clr"></div>
+    </section>

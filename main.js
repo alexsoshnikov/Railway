@@ -1,36 +1,35 @@
-
 // динамическое обновление контента 
-$(document).ready(function () {
-    $('#sign-in').click(function () {
-        $.ajax({
-            url: 'templates/signin.php'
-            , success: function (data) {
-                $('.main-content').html(data);
-            }
-        });
-    });
-});
-$(document).ready(function () {
-    $('.logo-name').click(function () {
-        $.ajax({
-            url: 'templates/main.php'
-            , success: function (data) {
-                $('.main-content').html(data);
-            }
-        });
-    });
-});
-$(document).ready(function () {
-    $('#sign-up').click(function () {
-        $.ajax({
-            url: 'templates/signup.php'
-            , success: function (data) {
-                $('.main-content').html(data);
-            
-            }
-        });
-    });
-});
+//$(document).ready(function () {
+//    $('#sign-in').click(function () {
+//        $.ajax({
+//            url: 'templates/signin.php'
+//            , success: function (data) {
+//                $('.main-content').html(data);
+//            }
+//        });
+//    });
+//});
+//$(document).ready(function () {
+//    $('.logo-name').click(function () {
+//        $.ajax({
+//            url: 'templates/main.php'
+//            , success: function (data) {
+//                $('.main-content').html(data);
+//            }
+//        });
+//    });
+//});
+//$(document).ready(function () {
+//    $('#sign-up').click(function () {
+//        $.ajax({
+//            url: 'templates/signup.php'
+//            , success: function (data) {
+//                $('.main-content').html(data);
+//            
+//            }
+//        });
+//    });
+//});
 // функция для input
 $(function () {
     $('input').on('change', function () {
@@ -78,8 +77,9 @@ $(document).ready(function () {
             success: function (data) {
                 // в случае, когда пришло success. Отработало без ошибок
                 if (data.result == 'success') {
-                    $('.whiteBox_signUp >').hide();
-                    $('#successRegistrationMain').show();
+                    $('.main-content-signup').hide();
+                    $('.loader-css').show();
+                    setTimeout('window.location = "index.php";', 1200);
                     // в случае ошибок в форме
                 }
                 else {
@@ -87,7 +87,7 @@ $(document).ready(function () {
                     $('#signUp_password').val('');
                     $('#signUp_password_2').val('');
                     for (var errorField in data.text_error) {
-                        $('#header_whiteBox_signUp_id').text(data.text_error[errorField]).css('color', 'red');
+                        $('.signup-title').text(data.text_error[errorField]).css('color', 'red');
                         $('#' + errorField).addClass('error_input');
                     }
                 }
@@ -119,15 +119,16 @@ $(document).ready(function () {
             success: function (data) {
                 // в случае, когда пришло success. Отработало без ошибок
                 if (data.result == 'success') {
-                    $('#header_whiteBox_signIn').text('Success!').css('color', 'green');
-                    window.location.href = 'index.php';
+                    $('.main-content-signin').hide();
+                    $('.loader-css').show();
+                    setTimeout('window.location = "index.php";', 1200);
                 }
                 // в случае ошибок в форме
                 else {
                     // перебираем массив с ошибками
                     for (var errorField in data.text_error) {
-                        $('#header_whiteBox_signIn').text(data.text_error[errorField]).css('color', 'red');
-                        $('#' + errorField).addClass('error_input');
+                        $('.signin-title').text(data.text_error[errorField]).css('color', 'red');
+                        $('label #' + errorField).addClass('error_input');
                     }
                 }
             }
@@ -164,14 +165,15 @@ $(document).ready(function () {
             success: function (data) {
                 // в случае, когда пришло success. Отработало без ошибок
                 if (data.result == 'success') {
-                    $('.main_box').hide();
-                    $('.loadpay').show();
+                    $('.main-content-payment').hide();
+                    $('.loader-css').show();
                     setTimeout('window.location = "index.php";', 2500);
                 }
                 // в случае ошибок в форме
                 else {
                     // перебираем массив с ошибками
                     for (var errorField in data.text_error) {
+                        $('.payment-title').text(data.text_error[errorField]).css('color', 'red');
                         $('#' + errorField).addClass('error_input');
                     }
                 }
@@ -204,9 +206,11 @@ $(document).ready(function () {
             success: function (data) {
                 // в случае, когда пришло success. Отработало без ошибок
                 if (data.result == 'success') {
-                    $('#form_search').hide();
-                    $('.loadingCities').show();
-                    $('.header_whiteBox').text(data.from + ' → ' + data.to).css('color', 'black');
+                    $('.main-content-search-route').hide();
+                     $('.loader-css').show();
+                     $('.selected-route ').show();
+                    $('.station-from').text(data.from);
+                     $('.station-to').text(data.to);
                     setTimeout('window.location = "index.php?page=schedule";', 2500);
                 }
                 // в случае ошибок в форме
@@ -214,7 +218,7 @@ $(document).ready(function () {
                     // перебираем массив с ошибками
                     for (var errorField in data.text_error) {
                         $('#' + errorField).addClass('error_input');
-                        $('.header_whiteBox').text(data.text_error[errorField]).css('color', 'red');
+                        $('.search-route-title').text(data.text_error[errorField]).css('color', 'red');
                     }
                 }
             }

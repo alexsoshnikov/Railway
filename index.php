@@ -36,7 +36,7 @@ require "db.php";
                                 <path d="M488.364,312.129c-6.775,2.47-10.272,9.959-7.81,16.735l13.128,36.069l-49.424-31.239   c-1.166-0.737-2.404-1.203-3.673-1.53c-0.275-0.087-0.566-0.167-0.858-0.233c-0.248-0.043-0.511-0.08-0.758-0.109   c-2.128-0.343-4.342-0.219-6.498,0.568c-6.776,2.462-10.272,9.959-7.81,16.735l26.284,72.22c2.477,6.776,9.967,10.265,16.742,7.804   c6.775-2.471,10.258-9.96,7.796-16.736l-13.274-36.485l49.847,31.51c3.482,2.201,7.722,2.586,11.452,1.231   c1.312-0.481,2.579-1.181,3.716-2.099c4.343-3.512,5.988-9.384,4.08-14.637l-26.212-72.002   C502.629,313.156,495.14,309.667,488.364,312.129z" /> </g>
                         </svg>
                     </div>
-                    <h1 class="main-header-name">Railway Company</h1> </div>
+                    <h1 class="main-header-name"><a href="index.php">Railway Company</a></h1> </div>
                 <?php 
                  if(!isset($_SESSION['logged_user'])) {
                   if (!isset($page) || $page == 'signin' || $page == 'signup') {
@@ -50,10 +50,19 @@ require "db.php";
             </header>
             <main class="main-content">
                 <?php 
+                $page = $_GET['page'];
 
-                      if (!isset($_GET['page'])) {
+                      if (!isset($page)) {
                           require('templates/main.php');
-                      }
+                      } elseif ($page == 'signin') {
+                          require('templates/signin.php');
+                      } elseif ($page == 'signup') {
+                          require('templates/signup.php');
+                     } elseif ($page == 'payment') {
+                          require('templates/payment.php');
+                     } elseif ($page == 'schedule') {
+                          require('templates/schedule.php');
+                     }
             ?>
             </main>
             <footer class="main-footer">
