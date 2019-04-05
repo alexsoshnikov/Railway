@@ -1,3 +1,4 @@
+<!--
 <a href="index.php">
     <div class="logo"></div>
 </a>
@@ -29,4 +30,13 @@
             </a>
         </li>
     </ul>
+</div>
+-->
+<div class="user-menu">
+    <div class="user-nb">
+        <h2 class="user-name">Ivan Ivanov</h2>
+        <h5 class="user-balance">Balance: 1000</h5></div>
+    <button class="user-button add-payment"></button>
+    <button class="user-button history-routes"></button>
+    <button class="user-button logout"></button>
 </div>

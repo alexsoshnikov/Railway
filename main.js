@@ -1,8 +1,51 @@
-//$( document ).ready(function(){
-//	  $( "#do_signupButton" ).click(function(){ 
-//          alert('asdasd');
-//	  });
-//	});
+
+// динамическое обновление контента 
+$(document).ready(function () {
+    $('#sign-in').click(function () {
+        $.ajax({
+            url: 'templates/signin.php'
+            , success: function (data) {
+                $('.main-content').html(data);
+            }
+        });
+    });
+});
+$(document).ready(function () {
+    $('.logo-name').click(function () {
+        $.ajax({
+            url: 'templates/main.php'
+            , success: function (data) {
+                $('.main-content').html(data);
+            }
+        });
+    });
+});
+$(document).ready(function () {
+    $('#sign-up').click(function () {
+        $.ajax({
+            url: 'templates/signup.php'
+            , success: function (data) {
+                $('.main-content').html(data);
+            
+            }
+        });
+    });
+});
+// функция для input
+$(function () {
+    $('input').on('change', function () {
+        var input = $(this);
+        if (input.val().length) {
+            input.addClass('populated');
+        }
+        else {
+            input.removeClass('populated');
+        }
+    });
+    setTimeout(function () {
+        $('#fname').trigger('focus');
+    }, 500);
+});
 // регистрация пользователя
 $(document).ready(function () {
     $('#form_signUp').submit(function () {
@@ -138,8 +181,6 @@ $(document).ready(function () {
         return false;
     });
 });
-
-
 $(document).ready(function () {
     $('#form_search').submit(function () {
         //убираем класс ошибок с инпутов

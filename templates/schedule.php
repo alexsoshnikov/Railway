@@ -229,9 +229,18 @@ $mainArr = RouteInfo(DoNewArray(StationToSomewhere($city_from), StationToSomewhe
 
 
 ?>
-        
-
-        <div id="nameRoute">
+    <section class="main-content-routes"> <span class="routes-title">Москва &rarr; Рязань</span>
+        <article class="routes-list"> <span class="list-train">MN0021</span>
+            <div class="list-arrival"> <span class="list-stations first">Курский вокзал</span> <span class="arrival-time">18:00</span> <span class="arrival-station">Курский вокзал</span> </div>
+            <div class="list-route-time">
+                <div class="route-arrow"></div> <span class="route-time">3h 21min</span> </div>
+            <div class="list-departure"> <span class="list-stations last">Курский вокзал</span> <span class="departure-time">21:00</span> <span class="departure-station">Рязань 1</span> </div>
+            <button class="list-button-buy">buy</button>
+        </article>
+        <div class="clr"></div>
+    </section>
+<!--
+    <div id="nameRoute">
         <?php echo $city_from;?> &rarr;
             <? echo $city_to;?>
     </div>
@@ -293,4 +302,4 @@ $mainArr = RouteInfo(DoNewArray(StationToSomewhere($city_from), StationToSomewhe
             </ul>
             <input class="submit" type="submit" value="Buy"> </div>
         <?php endforeach; ?>
-            <div class="clr"></div>
+            <div class="clr"></div>-->
