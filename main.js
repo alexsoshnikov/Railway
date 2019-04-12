@@ -63,7 +63,7 @@ $(document).ready(function () {
         $.ajax({
             // метод отправки 
             type: "POST", // путь до скрипта-обработчика
-            url: "templates/ajax_signup.php", // какие данные будут переданы
+            url: "app/ajax_signup.php", // какие данные будут переданы
             data: {
                 'signUp_name': signUp_name
                 , 'signUp_surname': signUp_surname
@@ -110,7 +110,7 @@ $(document).ready(function () {
         $.ajax({
             // метод отправки 
             type: "POST", // путь до скрипта-обработчика
-            url: "templates/ajax_signin.php", // какие данные будут переданы
+            url: "app/ajax_signin.php", // какие данные будут переданы
             data: {
                 'signIn_email': signIn_email
                 , 'signIn_password': signIn_password
@@ -153,7 +153,7 @@ $(document).ready(function () {
         $.ajax({
             // метод отправки 
             type: "POST", // путь до скрипта-обработчика
-            url: "templates/ajax_payment.php", // какие данные будут переданы
+            url: "app/ajax_payment.php", // какие данные будут переданы
             data: {
                 'number': number
                 , 'name': name
@@ -196,7 +196,7 @@ $(document).ready(function () {
         $.ajax({
             // метод отправки 
             type: "POST", // путь до скрипта-обработчика
-            url: "templates/ajax_search.php", // какие данные будут переданы
+            url: "app/ajax_search.php", // какие данные будут переданы
             data: {
                 'cityFrom': cityFrom
                 , 'cityTo': cityTo

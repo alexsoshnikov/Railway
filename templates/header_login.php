@@ -6,5 +6,5 @@
             ?>₽</h5></div>
     <a href="index.php?page=payment" class="user-button add-payment"></a>
     <a href="#" class="user-button history-routes"></a>
-    <a href="../templates/logout.php" class="user-button logout"></a>
+    <a href="../app/logout.php" class="user-button logout"></a>
 </div>
