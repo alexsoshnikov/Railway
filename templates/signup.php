@@ -17,4 +17,8 @@
         <input class="submit" type="submit" value="Sign Up" name="do_signup" id="do_signupButton"> </form>
 </section>
 <div class="loader-css">
-    <h1>LOADING</h1> <span></span> <span></span> <span></span> </div>
+    <h1>LOADING</h1> 
+    <span></span> 
+    <span></span> 
+    <span></span> 
+</div>
