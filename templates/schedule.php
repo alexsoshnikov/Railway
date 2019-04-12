@@ -9,7 +9,12 @@ $information = new SearchInfo();
 
 ?>
 <section class="main-content-routes">
-    <span class="routes-title"><?php echo $city_from;?> &rarr; <?php echo $city_to;?></span>
+    <span class="routes-title"><?php 
+       if(!empty($search -> AllCalculate($city_from, $city_to)))
+           echo $city_from. ' &rarr; '. $city_to; 
+       else 
+           echo "No routes found!";?>
+    </span>
      
     <?php foreach ($search -> AllCalculate($city_from, $city_to) as $way) : ?>
     <article class="routes-list">
