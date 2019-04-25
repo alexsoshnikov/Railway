@@ -204,7 +204,8 @@ class SearchRoute {
             "first_station" => $route["first_station"],
             "last_station" => $route["last_station"],
             "start_time" => $route["start_time"],
-            "train_id" => $route["train_id"]
+            "train_id" => $route["train_id"],
+            "route_id" => $route["id_route"]
          );
       }
       return $res;
@@ -253,4 +254,12 @@ class SearchInfo {
       $date = $date_first + strtotime($hours . ':' . $minutes) - strtotime("00:00:00");
       return date('H:i', $date);
    }
+}
+
+class PurchaseInfo {
+   public function ArrStation($route_id) {
+      return $stations = R::getAll('SELECT * FROM station_route where id_route = ? order by number', [$route_id]);
+   }
+
+   
 }

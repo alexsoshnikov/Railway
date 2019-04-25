@@ -1,13 +1,3 @@
-<?php 
-include("app/classes_search.php");
-// на вход получаем два имени станций откуда и куда
-$city_from = $_SESSION['from'];  
-$city_to = $_SESSION['to'];   
-
-$search = new SearchRoute(); 
-$information = new SearchInfo();
-
-?>
 <section class="main-content-routes">
     <span class="routes-title"><?php 
        if(!empty($search -> AllCalculate($city_from, $city_to)))
@@ -33,7 +23,7 @@ $information = new SearchInfo();
             <span class="departure-time"><?php echo $information -> DepartureTime($way['pred_time'], $way['start_time'], $way['time'])?></span> 
             <span class="departure-station"><?php echo $information -> StationName($way['station_to'])?></span> 
         </div>
-        <button class="list-button-buy">buy</button>
+        <a href="index.php?page=purchase&id=<?php echo $way['ID'];?>" class="list-button-buy">buy</a>
     </article>
     <?php endforeach; ?>
     <div class="clr"></div>

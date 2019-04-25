@@ -28,4 +28,8 @@
     </div>
 </section>
 <div class="loader-css">
-    <h1>LOADING</h1> <span></span> <span></span> <span></span> </div>
+    <h1>LOADING</h1> 
+    <span></span> 
+    <span></span> 
+    <span></span> 
+</div>

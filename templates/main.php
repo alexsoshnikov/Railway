@@ -1,6 +1,8 @@
 <div class="selected-route">
     <div class="helper"> <span class="station-from"></span>
-        <div class="route-arrow"></div> <span class="station-to"></span> </div>
+        <div class="route-arrow"></div> 
+          <span class="station-to"></span> 
+        </div>
     <div class="loader-css">
         <h1>LOADING</h1> 
         <span></span>
@@ -8,7 +10,8 @@
         <span></span> 
     </div>
 </div>
-<section class="main-content-search-route"> <span class="search-route-title">Choose your route</span>
+<section class="main-content-search-route"> 
+    <span class="search-route-title">Choose your route</span>
     <form class="form-search" id="form_search" action="index.php" method="POST">
         <label>
             <input class="text" id="cityFrom" type="text" placeholder="From"><span>From</span> </label>
