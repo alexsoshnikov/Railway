@@ -15,7 +15,7 @@ foreach($arrayFields as $fieldName => $oneField){
     }
 } 
 
-   $userCurrent = R::findOne('users', 'email = ?', array($_POST['signIn_email']));
+   $userCurrent = R::findOne('passenger', 'email = ?', array($_POST['signIn_email']));
     if ($userCurrent)
     {
         //логин существует 

@@ -9,6 +9,8 @@ $search = new SearchRoute();
 $information = new SearchInfo();
 $tickets = new PurchaseInfo();
 
+   
+
 ?>
     <!DOCTYPE html>
     <html lang="en">

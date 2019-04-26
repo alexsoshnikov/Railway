@@ -10,7 +10,7 @@ class SearchRoute {
    }
    // получаем массив всех станций в этих городах
    public function FindStations($city) {
-      $idstations = R::find('station', 'city_id = ?', array(
+      $idstations = R::find('station', 'id_city = ?', array(
          R::findOne('city', 'name = ?', array(
             $city
          ))->id
@@ -41,9 +41,9 @@ class SearchRoute {
          foreach($array_from as $start_route) {
             if (($start_route["id_route"] == $route_ends["id_route"]) && $start_route["number"] < $route_ends["number"] && $this->TimeStart($route_ends["id_route"])) {
                $arr = null;
-               $arr[] = R::getAll('SELECT * FROM schedule where id_route = ? order by time_start', [$start_route["id_route"]]);
+               $arr[] = R::getAll('SELECT * FROM schedule where id_route = ? order by start_date', [$start_route["id_route"]]);
                foreach($this->Arrout($arr) as $key) {
-                  if (($this->CreateDate($key["time_start"])) == date($_SESSION['datepicker'])) {
+                  if (($this->CreateDate($key["start_date"])) == date($_SESSION['datepicker'])) {
                      $result[] = array(
                         "ID" => $number,
                         "id_route" => $route_ends["id_route"],
@@ -51,8 +51,9 @@ class SearchRoute {
                         "station_to" => $route_ends["id_station"],
                         "first_station" => $this->FirstStationRoute($route_ends["id_route"]) ,
                         "last_station" => $this->LastStationRoute($route_ends["id_route"]) ,
-                        "start_time" => $this->CreateTime($key["time_start"]) ,
-                        "train_id" => $key["id_train"]
+                        "start_time" => $this->CreateTime($key["start_date"]) ,
+                        "train_id" => $key["id_train"],
+                        "schedule_id" => $key["id"]
                      );
                      $number++;
                   }
@@ -78,7 +79,7 @@ class SearchRoute {
       $timeright = array();
       $arr[] = R::getAll('SELECT * FROM schedule where id_route = ?', [$id_route]);
       foreach($this->Arrout($arr) as $key) {
-         if (($this->CreateDate($key["time_start"])) == date($_SESSION['datepicker'])) $timeright[] = $key["id_route"];
+         if (($this->CreateDate($key["start_date"])) == date($_SESSION['datepicker'])) $timeright[] = $key["id_route"];
       }
       return $timeright;
    }
@@ -123,10 +124,10 @@ class SearchRoute {
    }
    // функция сложения общий массы поезда
    public function TotalWeightWagon($id_train) {
-      $wagon = R::getAll('SELECT * FROM wagon where train_id = ? ', [$id_train]);
+      $wagon = R::getAll('SELECT * FROM wagon where id_train = ? ', [$id_train]);
       foreach($wagon as $keys) {
          $totalWeight = $totalWeight + R::findOne('type_wagon', 'id = ?', array(
-            $keys["type_wagon_id"]
+            $keys["id_type"]
          ))->weight;
       }
       return $totalWeight;
@@ -137,10 +138,10 @@ class SearchRoute {
       $engine = R::findOne('engine', 'id = ? ', array(
          R::findOne('train', 'id = ? ', array(
             $id_train
-         ))->engine_id
+         ))->id_engine
       ));
       $engine_info = R::findOne('type_engine', 'id = ? ', array(
-         $engine->type_engine_id
+         $engine->id_type
       ));
       return $engine_info;
    }
@@ -205,7 +206,8 @@ class SearchRoute {
             "last_station" => $route["last_station"],
             "start_time" => $route["start_time"],
             "train_id" => $route["train_id"],
-            "route_id" => $route["id_route"]
+            "route_id" => $route["id_route"], 
+            "schedule" => $route["schedule_id"]
          );
       }
       return $res;
@@ -257,9 +259,18 @@ class SearchInfo {
 }
 
 class PurchaseInfo {
+
    public function ArrStation($route_id) {
       return $stations = R::getAll('SELECT * FROM station_route where id_route = ? order by number', [$route_id]);
    }
 
-   
+   public function WagonTrain($train_id) {
+     return $wagon_id  = R::getAll('SELECT * FROM wagon where id_train = ?', [$train_id]);
+   }
+
+   public function WagonTypeClass($type_id) {
+      return $typename = R::findOne('type_wagon', 'id = ?' , array($type_id)); 
+   }
+
+
 }

@@ -884,7 +884,8 @@ body::-webkit-scrollbar {
 }
 .main-content-purchase-tickets .route-info .main-info .list-arrival,
 .main-content-purchase-tickets .route-info .main-info .list-departure {
-  width: 230px;
+  width: 300px;
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;

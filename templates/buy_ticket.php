@@ -22,15 +22,16 @@
                 </div>
             </div>
             <div class="type-wagon single-slide">
+              <?php foreach ($tickets -> WagonTrain($purchase['train_id']) as $key) : ?>
                 <div>
                     <section class="type-wagon-top-info">
                         <article class="wagon-name">
                             <p>Wagon ID:</p>
-                            <span>1212-333</span>
+                            <span><?php echo $key['identification_number'] ?></span>
                         </article>
                         <article class="wagon-type">
                             <p>Wagon type:</p>
-                            <span>Class-1</span>
+                            <span><?php echo $tickets -> WagonTypeClass($key['id_type']) -> name?></span>
                         </article>
                         <article class="wagon-price">
                             <p>Price:</p>
@@ -39,27 +40,8 @@
                     </section>
                     <section class="type-wagon-seats">
                         <form class="form-seats" action="#">
-                            <div class="list-of-seats seats-grid-20">
+                            <div class="list-of-seats">
                                 <div class="seat-id" data-value="1"><span>1</span></div>
-                                <div class="seat-id" data-value="2"><span>2</span></div>
-                                <div class="seat-id" data-value="3"><span>3</span></div>
-                                <div class="seat-id" data-value="4"><span>4</span></div>
-                                <div class="seat-id" data-value="5"><span>5</span></div>
-                                <div class="seat-id" data-value="6"><span>6</span></div>
-                                <div class="seat-id" data-value="7"><span>7</span></div>
-                                <div class="seat-id" data-value="8"><span>8</span></div>
-                                <div class="seat-id" data-value="9"><span>9</span></div>
-                                <div class="seat-id" data-value="10"><span>10</span></div>
-                                <div class="seat-id" data-value="11"><span>11</span></div>
-                                <div class="seat-id" data-value="12"><span>12</span></div>
-                                <div class="seat-id" data-value="13"><span>13</span></div>
-                                <div class="seat-id" data-value="14"><span>14</span></div>
-                                <div class="seat-id" data-value="15"><span>15</span></div>
-                                <div class="seat-id" data-value="16"><span>16</span></div>
-                                <div class="seat-id" data-value="17"><span>17</span></div>
-                                <div class="seat-id" data-value="18"><span>18</span></div>
-                                <div class="seat-id" data-value="19"><span>19</span></div>
-                                <div class="seat-id" data-value="20"><span>20</span></div>
                             </div>
                             <div class="selected-seats-buy">
                                 <h3>Selected Seat: <span id="selected-seat"></span></h3>
@@ -68,7 +50,7 @@
                         </form>
                     </section>
                 </div>
-                <div>132312312312</div>
+               <?php endforeach; ?>
             </div>
             <script>
                 $('.single-slide').slick({});

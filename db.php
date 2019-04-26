@@ -1,7 +1,7 @@
 <?php 
 
 require "libs/rb-mysql.php";
- R::setup( 'mysql:host=localhost;dbname=examplerailway',
+ R::setup( 'mysql:host=localhost;dbname=railwaycompany',
         'root', '' );
 
 
