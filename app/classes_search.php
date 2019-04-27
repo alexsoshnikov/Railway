@@ -145,7 +145,11 @@ class SearchRoute {
       ));
       return $engine_info;
    }
-    
+   
+   public function MultMoneyDest($dest, $mult) {
+      return $dest * $mult; 
+   }
+
    // пересчет и вывод конечного массива
    public function RouteInfo($arr) {
       $res = array();
@@ -155,6 +159,7 @@ class SearchRoute {
          $totalWeight = $this->TotalWeightWagon($route["train_id"]) + $this->EngineInfo($route["train_id"])->weight;
          $time = 0;
          $predtime = 0;
+         $price = 0; 
          if ($route["start_from"] == $route["first_station"]) {
             $i = 0;
             do {
@@ -165,8 +170,9 @@ class SearchRoute {
                   $id_end
                ));
                $time = $time + $this->DestinationTime($distance->distance, $totalWeight, $this->EngineInfo($route["train_id"])->traction_force, $this->EngineInfo($route["train_id"])->max_speed, $distance->section_speed);
-               $i++;
                $predtime = 0;
+               $price += $this->MultMoneyDest($distance->distance, $distance->price_mult); 
+               $i++;
             }
             while ($id_end != $route["station_to"]);
          }
@@ -194,6 +200,7 @@ class SearchRoute {
                ));
                $time = $time + $this->DestinationTime($distance->distance, $totalWeight, $this->EngineInfo($route["train_id"])->traction_force, $this->EngineInfo($route["train_id"])->max_speed, $distance->section_speed);
                $found_key++;
+               $price += $this->MultMoneyDest($distance->distance, $distance->price_mult); 
             }
             while ($id_end_pred_2 != $route["station_to"]);
          }
@@ -208,7 +215,8 @@ class SearchRoute {
             "start_time" => $route["start_time"],
             "train_id" => $route["train_id"],
             "route_id" => $route["id_route"], 
-            "schedule" => $route["schedule_id"]
+            "schedule" => $route["schedule_id"],
+            "price" => $price
          );
       }
       return $res;
@@ -266,12 +274,23 @@ class PurchaseInfo {
    }
 
    public function WagonTrain($train_id) {
-     return $wagon_id  = R::getAll('SELECT * FROM wagon where id_train = ?', [$train_id]);
+      return $wagon_id  = R::getAll('SELECT * FROM wagon where id_train = ?', [$train_id]);
    }
 
    public function WagonTypeClass($type_id) {
       return $typename = R::findOne('type_wagon', 'id = ?' , array($type_id)); 
    }
 
+   public function WagonTypeMult($price, $type_id) {
+      $mult_type = R::findOne('type_wagon', 'id = ?' , array($type_id))->price_mult; 
+      return $mult_type *= $price; 
+   }
 
+   public function WagonSeats($wagon_id) {
+      return $seats_arr = R::getAll('Select * From seat where identification_number = ?', [$wagon_id]); 
+   }
+
+   public function SeatTicket($seat_id) { 
+      return $ticket = R::findOne('ticket', 'id_seat = ?' , array($seat_id)); 
+   }
 }

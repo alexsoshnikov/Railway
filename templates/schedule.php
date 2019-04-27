@@ -5,7 +5,6 @@
        else 
            echo "No routes found!";?>
     </span>
-     
     <?php foreach ($search -> AllCalculate($city_from, $city_to) as $way) : ?>
     <article class="routes-list">
         <span class="list-train"><?php echo $information ->TrainName($way['train_id'])?></span>

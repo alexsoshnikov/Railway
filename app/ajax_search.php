@@ -32,14 +32,9 @@ if(empty($errorContainer_search)){
     $_SESSION['from'] = $from;
     $_SESSION['to'] = $to;
     $_SESSION['datepicker'] = $time;
-
     echo json_encode(array('result' => 'success', 'from'=>$from, 'to'=> $to));
-       
-
-    
 }
-   else
-{
+   else {
     // если есть ошибки то отправляемc
     echo json_encode(array('result' => 'error', 'text_error' => $errorContainer_search));
 }

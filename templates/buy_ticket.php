@@ -35,16 +35,23 @@
                         </article>
                         <article class="wagon-price">
                             <p>Price:</p>
-                            <span>1000 Rub</span>
+                            <span><?php echo round($tickets -> WagonTypeMult($purchase['price'],$key['id_type']), 2) ?> Rub</span>
                         </article>
                     </section>
                     <section class="type-wagon-seats">
                         <form class="form-seats" action="#">
-                            <div class="list-of-seats">
-                                <div class="seat-id" data-value="1"><span>1</span></div>
+                            <div class="list-of-seats seats-grid-<?=$key['id_type'];?>">
+                            <?php $seat_num = 1; ?>
+                            <?php foreach ($tickets -> WagonSeats($key['identification_number']) as $seat) : ?>
+                              <?php if (empty($tickets -> SeatTicket($seat['id']))) : ?> 
+                                <div class="seat-id" data-value="<?php echo $seat['id']?>"><span><?php echo $seat_num++?></span></div>
+                               <?php else: ?>
+                               <div class="seat-id" style="background: grey;" data-value="Занят"><span><?php echo $seat_num++?></span></div>
+                               <?php endif ?>
+                            <?php endforeach; ?>
                             </div>
                             <div class="selected-seats-buy">
-                                <h3>Selected Seat: <span id="selected-seat"></span></h3>
+                                <h3>Selected ID:  <span id="selected-seat"></span></h3>
                                 <input type="submit" class="submit-buy" value="buy">
                             </div>
                         </form>

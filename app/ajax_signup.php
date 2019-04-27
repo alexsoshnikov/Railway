@@ -45,11 +45,8 @@ foreach($arrayFields as $fieldName => $oneField){
 
 // делаем ответ для клиента
 if(empty($errorContainer_SingUp)){
-   
     echo json_encode(array('result' => 'success'));
-    
     // заргужаем данные в бд в случае успеха 
-
           $passenger = R::dispense('passenger');
           $passenger->name = $_POST['signUp_name'];
           $passenger->surname = $_POST['signUp_surname'];
@@ -58,10 +55,8 @@ if(empty($errorContainer_SingUp)){
           $passenger->email = $_POST['signUp_email'];
           $passenger->password = password_hash($_POST['signUp_password'], PASSWORD_DEFAULT);
           R::store($passenger);
-    
 }
-   else
-{
+ else {
     // если есть ошибки то отправляем
     echo json_encode(array('result' => 'error', 'text_error' => $errorContainer_SingUp));
 }

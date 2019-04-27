@@ -16,26 +16,26 @@
 .selected {
   background-color: #215301 !important;
 }
-.seats-grid-45 {
+.seats-grid-4 {
   width: 80%;
   align-items: center;
   grid-template-columns: repeat(9, 11.11111111%);
   grid-template-rows: 35px 35px 35px 35px 35px;
   margin: 15px 0 0 0;
 }
-.seats-grid-40 {
-  width: 80%;
-  align-items: center;
-  grid-template-columns: repeat(10, 10%);
-  grid-template-rows: 40px 40px 40px 40px;
-  margin: 20px 0 0 0;
-}
-.seats-grid-20 {
+.seats-grid-3 {
   width: 80%;
   align-items: center;
   grid-template-columns: repeat(10, 10%);
   grid-template-rows: 40px 40px;
   margin: 50px 0 0 0;
+}
+.seats-grid-2 {
+  width: 80%;
+  align-items: center;
+  grid-template-columns: repeat(10, 10%);
+  grid-template-rows: 40px 40px 40px 40px;
+  margin: 20px 0 0 0;
 }
 html,
 body {
