@@ -180,21 +180,22 @@ class SearchRoute {
                   $id_end_pred
                ));
                $predtime = $predtime + $this->DestinationTime($distance->distance, $totalWeight, $this->EngineInfo($route["train_id"])->traction_force, $this->EngineInfo($route["train_id"])->max_speed, $distance->section_speed);
-               $i++;
+               $j++;
             }
             while ($id_end_pred != $route["start_from"]);
+
             $found_key = array_search($route["start_from"], array_column($routeArr, 'id_station'));
             do {
-               $id_start_pred = $routeArr[$found_key]["id_station"];
-               $id_end_pred = $routeArr[$found_key + 1]["id_station"];
+               $id_start_pred_2 = $routeArr[$found_key]["id_station"];
+               $id_end_pred_2 = $routeArr[$found_key + 1]["id_station"];
                $distance = R::findOne('destination', 'start_station = ? and end_station = ?', array(
-                  $id_start_pred,
-                  $id_end_pred
+                  $id_start_pred_2,
+                  $id_end_pred_2
                ));
                $time = $time + $this->DestinationTime($distance->distance, $totalWeight, $this->EngineInfo($route["train_id"])->traction_force, $this->EngineInfo($route["train_id"])->max_speed, $distance->section_speed);
                $found_key++;
             }
-            while ($id_end_pred != $route["station_to"]);
+            while ($id_end_pred_2 != $route["station_to"]);
          }
          $res[] = array(
             "ID" => $route["ID"],
