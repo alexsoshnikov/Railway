@@ -10,6 +10,7 @@ $arrayFields = array(
     'cvc' => $_POST['cvc'],
     'money' => $_POST['money']
 );
+
  
 // проверка всех полей на пустоту
 foreach($arrayFields as $fieldName => $oneField){

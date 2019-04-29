@@ -1,5 +1,16 @@
 <?php 
 require "db.php";
+include("app/classes_search.php");
+// на вход получаем два имени станций откуда и куда
+$city_from = $_SESSION['from'];  
+$city_to = $_SESSION['to'];   
+
+$search = new SearchRoute(); 
+$information = new SearchInfo();
+$tickets = new PurchaseInfo();
+
+   
+
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -14,6 +25,9 @@ require "db.php";
         <script src="js/datepicker.min.js"></script>
         <script src="js/i18n/datepicker.en.js"></script>
         <script src="js/jquery.card.js"></script>
+        <link rel="stylesheet" type="text/css" href="js/slick-1.8.1/slick/slick.css" />
+        <link rel="stylesheet" type="text/css" href="js/slick-1.8.1/slick/slick-theme.css" />
+        <script type="text/javascript" src="js/slick-1.8.1/slick/slick.min.js"></script>
         <meta charset="UTF-8">
         <title>Railway company</title>
     </head>
@@ -62,6 +76,16 @@ require "db.php";
                           require('templates/payment.php');
                      } elseif ($page == 'schedule') {
                           require('templates/schedule.php');
+                     } elseif ($page == 'purchase') {
+                         $id = $_GET['id'];
+                         $purchase = [];
+                         foreach ($search -> AllCalculate($city_from, $city_to) as $key) {
+                            if($key['ID'] == $id ){
+                                 $purchase = $key;
+                                 break; 
+                               }
+                           }
+                         require('templates/buy_ticket.php');
                      }
             ?>
             </main>
