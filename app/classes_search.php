@@ -290,7 +290,7 @@ class PurchaseInfo {
       return $seats_arr = R::getAll('Select * From seat where identification_number = ?', [$wagon_id]); 
    }
 
-   public function SeatTicket($seat_id) { 
-      return $ticket = R::findOne('ticket', 'id_seat = ?' , array($seat_id)); 
+   public function SeatTicket($seat_id, $schedule_id) { 
+      return $ticket = R::findOne('ticket', 'id_seat = ? and id_schedule = ?' , array($seat_id, $schedule_id)); 
    }
 }

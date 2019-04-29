@@ -143,7 +143,7 @@
     width: 80%;
     align-items: center;
     grid-template-columns: repeat(9, 100%/9);     
-    grid-template-rows: 35px 35px 35px 35px 35px;
+    grid-template-rows: 40px 40px 40px 40px 40px;
     margin: 15px 0 0 0; 
 }
 
@@ -499,7 +499,6 @@ body::-webkit-scrollbar {
     border-radius: 25px;
     background-color: lighten(@color-button-bg, 4%);
     box-shadow: 0 0 10px 10px darken(@color-button-bg, 5%);
-
     .payment-title {
         margin: 15px 0;
         display: block;
@@ -513,7 +512,6 @@ body::-webkit-scrollbar {
         display: flex;
         justify-content: space-between;
         align-items: center;
-
         .card-paypal {
             display: flex;
             flex-direction: column;
@@ -533,9 +531,7 @@ body::-webkit-scrollbar {
             }
         }
     }
-
     .form-inputs(220px);
-
     .form-payment {
         margin: 0 50px 0 0;
         display: flex;
@@ -679,9 +675,6 @@ body::-webkit-scrollbar {
 }
 
 .main-content-purchase-tickets .route-info .type-wagon div {
-    height: 100%;
-    
-
     .type-wagon-top-info {
         display: flex;
         justify-content: space-around;
@@ -705,58 +698,83 @@ body::-webkit-scrollbar {
         }
     }
     .type-wagon-seats { 
-        .form-seats {
-            display: flex;
-            justify-content: space-around;
-            margin: 15px 0;
-        }
-        .selected-seats-buy {
-            display: flex;
-            flex-direction: column;
-            width: 200px;
-            height: 200px;
-            h3 {
-                text-align: center;
-                .main-font(@color-main-text, prompt-medium, 19px);
-            }
-            .submit-buy {
-                .form-buttons(130px);
-            }
-        }
+        display: flex;
+        justify-content: center;
         .list-of-seats {
-            width: 55%;
             border: 1px solid black;
             border-radius: 10px;
             display: grid; 
-            .seat-id {
-                cursor: pointer;
-                justify-self: center;
-                width: 30px;
-                height: 30px;
-                border-radius: 7px;
-                border: 1px solid black;
-                background-color: #3d9a01;
-                text-align: center;
-                span {
-                    margin: 6px 0 0 0;
-                    display: block;
-                    .main-font(@color-main-text,
-                    prompt-regular,
-                    15px);
-                }
-                &:hover {
-                   background-color: darken(#3d9a01, 6%); 
-                }
-                &:focus {
-                  background-color: #999;
-                  span {
-                    color: #000;
-                  }  
+            .seat-id { 
+                cursor: pointer; 
+                justify-self: center; 
+                width: 35px; 
+                height: 35px; 
+                border-radius: 7px; 
+                border: 1px solid black; 
+                background-color: #3d9a01; 
+                text-align: center; 
+                  span { 
+                    margin: 8px 0 0 0; 
+                    display: block; 
+                     .main-font(@color-main-text, 
+                       prompt-regular, 
+                       15px); 
                 } 
-            }
+                &:hover { 
+                   background-color: darken(#3d9a01, 6%); 
+                }  
+           } 
         }
     }   
 }
+
+.form-seats {
+    display: flex;
+    #selected_seat {
+        .main-font(@color-main-text,
+         prompt-regular,
+         14px);
+        display: inline-block;
+        padding: 15px 0;
+        margin: 10px auto;
+        text-transform: uppercase;
+        text-align: center;
+        border: 1px solid transparent;
+        width: 200px;
+        outline: none;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        background-color: darken(@color-button-bg, 10%);
+        border-radius: 10px;
+    }
+    ::-webkit-input-placeholder {color:@color-main-text; opacity:1;}
+    ::-moz-placeholder          {color:@color-main-text; opacity:1;}
+    :-moz-placeholder           {color:@color-main-text; opacity:1;}
+    :-ms-input-placeholder      {color:@color-main-text; opacity:1;}
+
+    .seats-input {
+        display: none;
+    }
+    .submit-buy {
+        .form-buttons(130px);
+    }
+}
+
+.purchase-thanks {
+    display: none;
+    .purchase-thanks-help-wrapper {
+        display: flex;
+        flex-direction: column;
+        .thanks {
+            .main-font(@color-main-text,
+            prompt-medium,
+            35px);
+            text-align: center;
+        }
+    } 
+}
+
 
 .main-footer {
     height: 100px;

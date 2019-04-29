@@ -22,6 +22,7 @@
                 </div>
             </div>
             <div class="type-wagon single-slide">
+            <?php $part = 1?>
               <?php foreach ($tickets -> WagonTrain($purchase['train_id']) as $key) : ?>
                 <div>
                     <section class="type-wagon-top-info">
@@ -39,29 +40,41 @@
                         </article>
                     </section>
                     <section class="type-wagon-seats">
-                        <form class="form-seats" action="#">
                             <div class="list-of-seats seats-grid-<?=$key['id_type'];?>">
-                            <?php $seat_num = 1; ?>
-                            <?php foreach ($tickets -> WagonSeats($key['identification_number']) as $seat) : ?>
-                              <?php if (empty($tickets -> SeatTicket($seat['id']))) : ?> 
-                                <div class="seat-id" data-value="<?php echo $seat['id']?>"><span><?php echo $seat_num++?></span></div>
-                               <?php else: ?>
-                               <div class="seat-id" style="background: grey;" data-value="Занят"><span><?php echo $seat_num++?></span></div>
-                               <?php endif ?>
-                            <?php endforeach; ?>
+                              <?php $seat_num = 1; ?>
+                              <?php foreach ($tickets -> WagonSeats($key['identification_number']) as $seat) : ?> 
+                              <?php if (empty($tickets -> SeatTicket($seat['id'], $purchase['schedule']))) : ?> 
+                                <div class="seat-id" data-value="<?php echo $seat['id']?>"><span><?php echo $seat_num++?></span></div> 
+                              <?php else: ?> 
+                                <div class="seat-id" style="background: grey;" data-value="The place is busy"><span><?php echo $seat_num++?></span></div> 
+                              <?php endif ?> 
+                              <?php endforeach; ?> 
                             </div>
-                            <div class="selected-seats-buy">
-                                <h3>Selected ID:  <span id="selected-seat"></span></h3>
-                                <input type="submit" class="submit-buy" value="buy">
-                            </div>
-                        </form>
                     </section>
                 </div>
+                <?php $part++ ?>
                <?php endforeach; ?>
             </div>
+            <form class="form-seats" id="form_Ticket" action="index.php?page=purchase&id=<?=$purchase['ID']?>" method="POST">
+                <input type="text" class="seats-input" id="seats_price" value="<?=$purchase['price']?>" disabled>
+                <input type="text" class="seats-input" id="seats_schedule" value="<?=$purchase['schedule']?>" disabled>
+                <input type="text" placeholder="Seat ID" id="selected_seat" disabled>
+                <input type="submit" id="do_buy" class="submit-buy" value="buy">
+            </form>
             <script>
                 $('.single-slide').slick({});
             </script>
         </div>
     </div>
 </section>
+<div class="purchase-thanks">
+       <div class="purchase-thanks-help-wrapper">
+         <h1 class="thanks">Thank you for the purchasing tickets!</h1>
+             <div class="loader-css">
+                <h1>LOADING</h1> 
+                  <span></span> 
+                  <span></span> 
+                  <span></span> 
+             </div>
+       </div>
+    </div>

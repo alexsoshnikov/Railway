@@ -2,9 +2,10 @@ $(document).ready(function() {
     $('.list-of-seats .seat-id').click(function() {
         $(this).parent().find('.seat-id').removeClass('selected');
         $(this).addClass('selected');
-        var val = $(this).attr('data-value');
-        document.getElementById('selected-seat').innerText = val;
+        var vals = $(this).attr('data-value');
+        $(this).parents().find('#selected_seat').val(vals);
     });
+
 });
 
 $(function() {
@@ -19,6 +20,48 @@ $(function() {
     setTimeout(function() {
         $('#fname').trigger('focus');
     }, 500);
+});
+//для покупки билетов
+$(document).ready(function() {
+    $('#form_Ticket').submit(function() {
+        //убираем класс ошибок с инпутов
+        $('input').each(function() {
+            $(this).removeClass('error_input');
+        });
+        // получение данных из полей
+        var seats_price = $('#seats_price').val();
+        var seats_schedule = $('#seats_schedule').val();
+        var selected_seat = $('#selected_seat').val();
+        $.ajax({
+            // метод отправки 
+            type: "POST", // путь до скрипта-обработчика
+            url: "app/ajax_ticket.php", // какие данные будут переданы
+            data: {
+                'seats_price': seats_price,
+                'seats_schedule': seats_schedule,
+                'selected_seat': selected_seat
+            }, // тип передачи данных
+            dataType: "json", // действие, при ответе с сервера
+            success: function(data) {
+                // в случае, когда пришло success. Отработало без ошибок
+                if (data.result == 'success') {
+                    $('.main-content-purchase-tickets').hide();
+                    $('.purchase-thanks').show();
+                    $('.loader-css').show();
+                    setTimeout('window.location = "index.php";', 1400);
+                }
+                // в случае ошибок в форме
+                else {
+                    for (var errorField in data.text_error) {
+                        document.getElementById('selected_seat').value = data.text_error[errorField];
+                        $('#' + errorField).addClass('error_input');
+                    }
+                }
+            }
+        });
+        // останавливаем сабмит, чтоб не перезагружалась страница
+        return false;
+    });
 });
 // регистрация пользователя
 $(document).ready(function() {

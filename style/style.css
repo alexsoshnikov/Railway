@@ -20,7 +20,7 @@
   width: 80%;
   align-items: center;
   grid-template-columns: repeat(9, 11.11111111%);
-  grid-template-rows: 35px 35px 35px 35px 35px;
+  grid-template-rows: 40px 40px 40px 40px 40px;
   margin: 15px 0 0 0;
 }
 .seats-grid-3 {
@@ -935,9 +935,6 @@ body::-webkit-scrollbar {
   width: 50px;
   height: 300px;
 }
-.main-content-purchase-tickets .route-info .type-wagon div {
-  height: 100%;
-}
 .main-content-purchase-tickets .route-info .type-wagon div .type-wagon-top-info {
   display: flex;
   justify-content: space-around;
@@ -965,24 +962,76 @@ body::-webkit-scrollbar {
   font-family: prompt-regular;
   font-size: 25px;
 }
-.main-content-purchase-tickets .route-info .type-wagon div .type-wagon-seats .form-seats {
+.main-content-purchase-tickets .route-info .type-wagon div .type-wagon-seats {
   display: flex;
-  justify-content: space-around;
-  margin: 15px 0;
+  justify-content: center;
 }
-.main-content-purchase-tickets .route-info .type-wagon div .type-wagon-seats .selected-seats-buy {
-  display: flex;
-  flex-direction: column;
-  width: 200px;
-  height: 200px;
+.main-content-purchase-tickets .route-info .type-wagon div .type-wagon-seats .list-of-seats {
+  border: 1px solid black;
+  border-radius: 10px;
+  display: grid;
 }
-.main-content-purchase-tickets .route-info .type-wagon div .type-wagon-seats .selected-seats-buy h3 {
+.main-content-purchase-tickets .route-info .type-wagon div .type-wagon-seats .list-of-seats .seat-id {
+  cursor: pointer;
+  justify-self: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 7px;
+  border: 1px solid black;
+  background-color: #3d9a01;
   text-align: center;
-  color: #fff;
-  font-family: prompt-medium;
-  font-size: 19px;
 }
-.main-content-purchase-tickets .route-info .type-wagon div .type-wagon-seats .selected-seats-buy .submit-buy {
+.main-content-purchase-tickets .route-info .type-wagon div .type-wagon-seats .list-of-seats .seat-id span {
+  margin: 8px 0 0 0;
+  display: block;
+  color: #fff;
+  font-family: prompt-regular;
+  font-size: 15px;
+}
+.main-content-purchase-tickets .route-info .type-wagon div .type-wagon-seats .list-of-seats .seat-id:hover {
+  background-color: #317c01;
+}
+.form-seats {
+  display: flex;
+}
+.form-seats #selected_seat {
+  color: #fff;
+  font-family: prompt-regular;
+  font-size: 14px;
+  display: inline-block;
+  padding: 15px 0;
+  margin: 10px auto;
+  text-transform: uppercase;
+  text-align: center;
+  border: 1px solid transparent;
+  width: 200px;
+  outline: none;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  background-color: #1366d6;
+  border-radius: 10px;
+}
+.form-seats ::-webkit-input-placeholder {
+  color: #fff;
+  opacity: 1;
+}
+.form-seats ::-moz-placeholder {
+  color: #fff;
+  opacity: 1;
+}
+.form-seats :-moz-placeholder {
+  color: #fff;
+  opacity: 1;
+}
+.form-seats :-ms-input-placeholder {
+  color: #fff;
+  opacity: 1;
+}
+.form-seats .seats-input {
+  display: none;
+}
+.form-seats .submit-buy {
   color: #fff;
   font-family: prompt-regular;
   font-size: 14px;
@@ -1007,7 +1056,7 @@ body::-webkit-scrollbar {
   -webkit-transition: all 0.4s ease-out;
   border-radius: 10px;
 }
-.main-content-purchase-tickets .route-info .type-wagon div .type-wagon-seats .selected-seats-buy .submit-buy:hover {
+.form-seats .submit-buy:hover {
   background-color: #115dc4;
   -webkit-transform: scale(1.02);
   -moz-transform: scale(1.02);
@@ -1017,7 +1066,7 @@ body::-webkit-scrollbar {
   -webkit-transition: all 0.4s ease-out;
   box-shadow: 0 2px 0 #0a3979;
 }
-.main-content-purchase-tickets .route-info .type-wagon div .type-wagon-seats .selected-seats-buy .submit-buy:active {
+.form-seats .submit-buy:active {
   color: #115dc4;
   -webkit-transform: scale(1.02);
   -moz-transform: scale(1.02);
@@ -1027,37 +1076,18 @@ body::-webkit-scrollbar {
   -webkit-transition: all 0.15s ease-out;
   box-shadow: 0 0 0 #0a3979;
 }
-.main-content-purchase-tickets .route-info .type-wagon div .type-wagon-seats .list-of-seats {
-  width: 55%;
-  border: 1px solid black;
-  border-radius: 10px;
-  display: grid;
+.purchase-thanks {
+  display: none;
 }
-.main-content-purchase-tickets .route-info .type-wagon div .type-wagon-seats .list-of-seats .seat-id {
-  cursor: pointer;
-  justify-self: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 7px;
-  border: 1px solid black;
-  background-color: #3d9a01;
-  text-align: center;
+.purchase-thanks .purchase-thanks-help-wrapper {
+  display: flex;
+  flex-direction: column;
 }
-.main-content-purchase-tickets .route-info .type-wagon div .type-wagon-seats .list-of-seats .seat-id span {
-  margin: 6px 0 0 0;
-  display: block;
+.purchase-thanks .purchase-thanks-help-wrapper .thanks {
   color: #fff;
-  font-family: prompt-regular;
-  font-size: 15px;
-}
-.main-content-purchase-tickets .route-info .type-wagon div .type-wagon-seats .list-of-seats .seat-id:hover {
-  background-color: #317c01;
-}
-.main-content-purchase-tickets .route-info .type-wagon div .type-wagon-seats .list-of-seats .seat-id:focus {
-  background-color: #999;
-}
-.main-content-purchase-tickets .route-info .type-wagon div .type-wagon-seats .list-of-seats .seat-id:focus span {
-  color: #000;
+  font-family: prompt-medium;
+  font-size: 35px;
+  text-align: center;
 }
 .main-footer {
   height: 100px;

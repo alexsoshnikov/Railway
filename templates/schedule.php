@@ -22,7 +22,9 @@
             <span class="departure-time"><?php echo $information -> DepartureTime($way['pred_time'], $way['start_time'], $way['time'])?></span> 
             <span class="departure-station"><?php echo $information -> StationName($way['station_to'])?></span> 
         </div>
-        <a href="index.php?page=purchase&id=<?php echo $way['ID'];?>" class="list-button-buy">buy</a>
+        <?php if (isset($_SESSION['logged_user'])) : ?> 
+            <a href="index.php?page=purchase&id=<?php echo $way['ID'];?>" class="list-button-buy">buy</a>
+        <?php endif ?>
     </article>
     <?php endforeach; ?>
     <div class="clr"></div>
