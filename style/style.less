@@ -775,6 +775,77 @@ body::-webkit-scrollbar {
     } 
 }
 
+.main-content-history {
+    .history-title {
+        margin: 15px 0;
+        display: block;
+        text-align: center;
+        .main-font(@color-main-text,
+        prompt-medium,
+        33px);
+    }
+    .routes-list {
+        height: 170px;
+        width: 720px;
+        border-radius: 25px;
+        background-color: lighten(@color-button-bg, 4%);
+        box-shadow: 0 0 10px 10px darken(@color-button-bg, 5%);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .clr {
+        height: 50px;
+    }
+       
+}
+
+.main-content-history .routes-list {
+    .list-route {
+        width: 100%; 
+        text-align: center;
+        display: block;
+        margin: 15px 0 0 0;
+        .main-font(@color-main-text,
+        prompt-regular,
+        30px);
+    }
+
+    .list-arrival {
+        display: flex;
+    }
+    .ticket-id, .time-start, .price {
+        margin: 10px;
+        p {
+            text-align: center;
+            margin: 10px 2px 2px 2px;
+            .main-font(@color-main-text,
+            prompt-regular,
+            18px);
+        }
+        span {
+            margin: 3px;
+            text-align: center;
+            display: block;
+            .main-font(@color-main-text,
+            prompt-regular,
+            28px);
+        }
+    }
+    .status {
+        display: flex;
+        margin: 35px 5px 35px 15px;
+        span {
+            text-transform: uppercase;
+            .main-font(@color-main-text,
+            prompt-regular,
+            18px);
+        }
+    }
+}
+
+
 
 .main-footer {
     height: 100px;

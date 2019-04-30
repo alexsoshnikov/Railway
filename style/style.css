@@ -1089,6 +1089,73 @@ body::-webkit-scrollbar {
   font-size: 35px;
   text-align: center;
 }
+.main-content-history .history-title {
+  margin: 15px 0;
+  display: block;
+  text-align: center;
+  color: #fff;
+  font-family: prompt-medium;
+  font-size: 33px;
+}
+.main-content-history .routes-list {
+  height: 170px;
+  width: 720px;
+  border-radius: 25px;
+  background-color: #428bef;
+  box-shadow: 0 0 10px 10px #1872eb;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.main-content-history .clr {
+  height: 50px;
+}
+.main-content-history .routes-list .list-route {
+  width: 100%;
+  text-align: center;
+  display: block;
+  margin: 15px 0 0 0;
+  color: #fff;
+  font-family: prompt-regular;
+  font-size: 30px;
+}
+.main-content-history .routes-list .list-arrival {
+  display: flex;
+}
+.main-content-history .routes-list .ticket-id,
+.main-content-history .routes-list .time-start,
+.main-content-history .routes-list .price {
+  margin: 10px;
+}
+.main-content-history .routes-list .ticket-id p,
+.main-content-history .routes-list .time-start p,
+.main-content-history .routes-list .price p {
+  text-align: center;
+  margin: 10px 2px 2px 2px;
+  color: #fff;
+  font-family: prompt-regular;
+  font-size: 18px;
+}
+.main-content-history .routes-list .ticket-id span,
+.main-content-history .routes-list .time-start span,
+.main-content-history .routes-list .price span {
+  margin: 3px;
+  text-align: center;
+  display: block;
+  color: #fff;
+  font-family: prompt-regular;
+  font-size: 28px;
+}
+.main-content-history .routes-list .status {
+  display: flex;
+  margin: 35px 5px 35px 15px;
+}
+.main-content-history .routes-list .status span {
+  text-transform: uppercase;
+  color: #fff;
+  font-family: prompt-regular;
+  font-size: 18px;
+}
 .main-footer {
   height: 100px;
   flex: 0 0 auto;

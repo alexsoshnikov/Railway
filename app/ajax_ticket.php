@@ -19,6 +19,11 @@ foreach($arrayFields as $fieldName => $oneField){
 
 $type_wag = R::findOne('type_wagon', 'id = ?', array(R::findOne('wagon', 'identification_number = ?', array(R::findOne('seat', 'id = ?', array($_POST['selected_seat']))->identification_number))->id_type))->price_mult;
 
+if((R::findOne('passenger', 'id = ?', array($_SESSION['logged_user']->id))->balance) <=  ($type_wag * $_POST['seats_price'])) {
+     $errorContainer_buy['selected_seat'] = 'Not enough money';
+}
+
+
 // делаем ответ для клиента
 if(empty($errorContainer_buy)){
 

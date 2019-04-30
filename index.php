@@ -72,6 +72,8 @@ $tickets = new PurchaseInfo();
                           require('templates/signin.php');
                       } elseif ($page == 'signup') {
                           require('templates/signup.php');
+                     } elseif($page == 'history') {
+                          require('templates/history.php');
                      } elseif ($page == 'payment') {
                           require('templates/payment.php');
                      } elseif ($page == 'schedule') {

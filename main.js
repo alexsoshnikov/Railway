@@ -48,7 +48,7 @@ $(document).ready(function() {
                     $('.main-content-purchase-tickets').hide();
                     $('.purchase-thanks').show();
                     $('.loader-css').show();
-                    setTimeout('window.location = "index.php";', 1400);
+                    setTimeout('window.location = "index.php?page=history";', 1400);
                 }
                 // в случае ошибок в форме
                 else {

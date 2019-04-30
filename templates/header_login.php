@@ -7,6 +7,6 @@
         </h5>
     </div>
     <a href="index.php?page=payment" class="user-button add-payment"></a>
-    <a href="#" class="user-button history-routes"></a>
+    <a href="index.php?page=history" class="user-button history-routes"></a>
     <a href="../app/logout.php" class="user-button logout"></a>
 </div>

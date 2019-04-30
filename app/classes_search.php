@@ -293,4 +293,16 @@ class PurchaseInfo {
    public function SeatTicket($seat_id, $schedule_id) { 
       return $ticket = R::findOne('ticket', 'id_seat = ? and id_schedule = ?' , array($seat_id, $schedule_id)); 
    }
+
+   public function TicketInfo($user_id) {
+      return $ticket_info = R::getAll('SELECT * FROM ticket where id_user = ?', [$user_id]);
+   }
+
+   public function ScheduleInfo($schedule_id) {
+      return $schedule_info = R::findOne('schedule', 'id = ?', array($schedule_id)); 
+   }
+
+   public function RouteName($route_id) {
+      return $route_name = R::findOne('route', 'id = ?', array($route_id)); 
+   }
 }
