@@ -8,14 +8,12 @@ $city_to = $_SESSION['to'];
 $search = new SearchRoute(); 
 $information = new SearchInfo();
 $tickets = new PurchaseInfo();
-
-   
-
 ?>
     <!DOCTYPE html>
     <html lang="en">
 
     <head>
+        <link rel="shortcut icon" href="img/train.ico" type="image/x-icon">
         <link rel="stylesheet" href="style/normalize.css">
         <link rel="stylesheet" href="style/style.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">

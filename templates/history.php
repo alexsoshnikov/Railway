@@ -23,7 +23,11 @@
                        <span><?php echo $key['price']; ?> Rub</span>
                     </div> 
                     <div class="status">
-                       <span>active</span>
+                       <?php if ($tickets -> ScheduleInfo($key['id_schedule'])->start_date > date("Y-m-d H:i:s")) : ?> 
+                         <span  style="color: #19ff19" >active</span>
+                       <?php else: ?> 
+                         <span style="color: red">not active</span>
+                       <?php endif ?> 
                     </div> 
                  </div>
          </article>

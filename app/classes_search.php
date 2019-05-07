@@ -295,7 +295,7 @@ class PurchaseInfo {
    }
 
    public function TicketInfo($user_id) {
-      return $ticket_info = R::getAll('SELECT * FROM ticket where id_user = ?', [$user_id]);
+      return $ticket_info = R::getAll('SELECT * FROM ticket where id_user = ? order by id desc' , [$user_id]);
    }
 
    public function ScheduleInfo($schedule_id) {
@@ -305,4 +305,5 @@ class PurchaseInfo {
    public function RouteName($route_id) {
       return $route_name = R::findOne('route', 'id = ?', array($route_id)); 
    }
+
 }
