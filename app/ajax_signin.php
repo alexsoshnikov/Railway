@@ -32,11 +32,12 @@ foreach($arrayFields as $fieldName => $oneField){
 
 // делаем ответ для клиента
 if(empty($errorContainer_SignIn)){
-   
     $_SESSION['logged_user'] = $userCurrent;
     echo json_encode(array('result' => 'success'));
-    
-    
+
+    $history = R::dispense('enterhistory');
+    $history->id_user = $userCurrent->id; 
+    R::store($history); 
 }
    else
 {

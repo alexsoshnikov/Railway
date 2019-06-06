@@ -97,6 +97,7 @@ class SearchRoute {
     
    // функция пересчета времени в конкретном промежутке маршрута
    public function DestinationTime($distance, $weight, $traction, $maxtrain, $maxsection) {
+
       $a = ($traction * 1000) / ($weight * 1000) - 0.05;
       if ($maxsection != 0 && $maxsection < $maxtrain) {
          $tStart = (($maxsection * 1000) / 3600) / $a;
@@ -154,6 +155,7 @@ class SearchRoute {
    public function RouteInfo($arr) {
       $res = array();
       foreach($arr as $route) {
+
          $totalWeight = 0;
          $routeArr = R::getAll('SELECT * FROM station_route where id_route = ? order by number', [$route["id_route"]]);
          $totalWeight = $this->TotalWeightWagon($route["train_id"]) + $this->EngineInfo($route["train_id"])->weight;

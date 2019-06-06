@@ -145,7 +145,7 @@ $(document).ready(function() {
                     // перебираем массив с ошибками
                     for (var errorField in data.text_error) {
                         $('.signin-title').text(data.text_error[errorField]).css('color', 'red');
-                        $('label #' + errorField).addClass('error_input');
+                        $('#' + errorField).addClass('error_input');
                     }
                 }
             }

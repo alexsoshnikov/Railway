@@ -27,8 +27,8 @@ if(empty($errorContainer_payment)){
     
           $payment = R::dispense('payment');
           $payment->id_user = $_SESSION['logged_user']->id; 
-          $payment->card = $_POST['number'];
           $payment->money = $_POST['money'];
+          $payment->card = $_POST['number'];
           R::store($payment); 
 }
    else
